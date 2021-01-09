@@ -7,8 +7,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>beginning-util</artifactId>
-	<name>工具包</name>
-	<description>常有工具模块</description>
+	<name>beginning-util</name>
+	<description>常用工具模块</description>
 
 	<dependencies>
 		<dependency>

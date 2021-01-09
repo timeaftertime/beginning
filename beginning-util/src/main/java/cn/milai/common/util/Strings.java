@@ -1,5 +1,10 @@
 package cn.milai.common.util;
 
+/**
+ * String 相关工具类
+ * @author milai
+ * @date 2020.12.27
+ */
 public final class Strings {
 
 	private Strings() {

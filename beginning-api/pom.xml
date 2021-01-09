@@ -6,6 +6,6 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>beginning-api</artifactId>
-  <name>api</name>
+  <name>beginning-api</name>
   <description>api 相关代码</description>
 </project>
