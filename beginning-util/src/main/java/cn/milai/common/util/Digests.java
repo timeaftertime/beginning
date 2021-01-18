@@ -27,7 +27,7 @@ public final class Digests {
 	}
 
 	/**
-	 * 获取 sha-256 散列后的 16 进制字符串
+	 * 获取 sha-256 散列后的 16 进制字符串(长度为64)
 	 * @param str
 	 * @return
 	 */

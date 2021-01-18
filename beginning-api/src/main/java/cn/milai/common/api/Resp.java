@@ -33,7 +33,13 @@ public class Resp<T> {
 	 * @return
 	 */
 	public boolean isSuccess() {
-		return SUCCESS.equals(code);
+		return code != null && SUCCESS.equals(code);
+	}
+
+	/**
+	 * 构造一个所有字段为默认值的响应
+	 */
+	public Resp() {
 	}
 
 	/**
@@ -43,7 +49,7 @@ public class Resp<T> {
 	 * @param data
 	 * @param 用于 format desc 中的参数
 	 */
-	private Resp(String code, String desc, T data, String... descArgs) {
+	public Resp(String code, String desc, T data, String... descArgs) {
 		this.code = code;
 		this.desc = String.format(desc, (Object) descArgs);
 		this.data = data;
@@ -122,6 +128,18 @@ public class Resp<T> {
 	 */
 	public T getData() {
 		return data;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public void setData(T data) {
+		this.data = data;
 	}
 
 }

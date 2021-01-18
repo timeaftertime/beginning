@@ -21,6 +21,15 @@ public final class Randoms {
 	 * @return
 	 */
 	private static String randStr(char[] alphabet, int length) {
+		if (length < 0) {
+			throw new IllegalArgumentException("长度必须大于等于 0");
+		}
+		if (alphabet == null) {
+			alphabet = new char[0];
+		}
+		if (alphabet.length == 0 && length != 0) {
+			throw new IllegalArgumentException("生成长度不为 0 的随机字符串时字符表不能为空");
+		}
 		char[] result = new char[length];
 		for (int i = 0; i < length; i++) {
 			result[i] = alphabet[rand.nextInt(alphabet.length)];

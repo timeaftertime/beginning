@@ -3,6 +3,7 @@ package cn.milai.common.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class RandomsTest {
@@ -21,6 +22,22 @@ public class RandomsTest {
 				assertTrue(Chars.isLower(c) || Chars.isDigit(c));
 			}
 		}
+	}
+
+	@Test
+	public void testIllegalArguments() {
+		try {
+			Randoms.randLowerOrDigit(-1);
+		} catch (IllegalArgumentException e1) {
+			try {
+				Randoms.randLowerOrDigit(-100);
+			} catch (IllegalArgumentException e2) {
+				Randoms.randLowerOrDigit(0);
+				return;
+			}
+			Assert.fail();
+		}
+		Assert.fail();
 	}
 
 }
