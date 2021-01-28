@@ -1,0 +1,8 @@
+*.java                  text
+*.xml                   text
+
+.gitignore              text
+.gitattributes          text
+LICENSE                 text
+README.md               text
+
