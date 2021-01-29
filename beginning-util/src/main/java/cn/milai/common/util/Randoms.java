@@ -3,16 +3,28 @@ package cn.milai.common.util;
 import java.util.Random;
 
 /**
- * 随机相关工具类
+ * 线程安全的随机工具类
  * @author milai
  * @date 2020.12.27
  */
 public final class Randoms {
 
-	private Randoms() {
+	private static final ThreadLocal<Random> rands = new ThreadLocal<Random>();
+
+	private static Random getRand() {
+		if (rands.get() != null) {
+			return rands.get();
+		}
+		synchronized (rands) {
+			Random random = rands.get();
+			if (random == null) {
+				random = new Random();
+			}
+			return random;
+		}
 	}
 
-	private static final Random rand = new Random();
+	private Randoms() {}
 
 	/**
 	 * 获取从 alphabet 中随机挑选 length 个字符组成的字符串
@@ -32,7 +44,7 @@ public final class Randoms {
 		}
 		char[] result = new char[length];
 		for (int i = 0; i < length; i++) {
-			result[i] = alphabet[rand.nextInt(alphabet.length)];
+			result[i] = alphabet[getRand().nextInt(alphabet.length)];
 		}
 		return new String(result);
 	}
@@ -54,6 +66,24 @@ public final class Randoms {
 	 */
 	public static String randLowerOrDigit(int length) {
 		return randStr(Chars.LOWERS + Chars.DIGITS, length);
+	}
+
+	/**
+	 * 返回下一个随机浮点数 [0~1) 是否小于 limit
+	 * 
+	 * @param limit
+	 * @return
+	 */
+	public static boolean nextLess(double limit) {
+		return getRand().nextDouble() < limit;
+	}
+
+	/**
+	 * 返回下一个 [0~limit) 的随机整数
+	 * @return
+	 */
+	public static int nextInt(int limit) {
+		return getRand().nextInt(limit);
 	}
 
 }

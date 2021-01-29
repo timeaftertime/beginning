@@ -6,15 +6,16 @@
 		<artifactId>beginning</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>beginning-util</artifactId>
-	<name>beginning-util</name>
-	<description>常用工具模块</description>
+	<artifactId>beginning-http</artifactId>
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<groupId>cn.milai</groupId>
+			<artifactId>beginning-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
 		</dependency>
 	</dependencies>
 </project>

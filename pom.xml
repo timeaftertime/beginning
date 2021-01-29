@@ -10,6 +10,9 @@
 	<modules>
 		<module>beginning-api</module>
 		<module>beginning-util</module>
+		<module>beginning-io</module>
+		<module>beginning-ex</module>
+		<module>beginning-http</module>
 	</modules>
 
 	<properties>
@@ -19,9 +22,50 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>cn.milai</groupId>
+				<artifactId>beginning-api</artifactId>
+				<version>${beginning.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.milai</groupId>
+				<artifactId>beginning-ex</artifactId>
+				<version>${beginning.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.milai</groupId>
+				<artifactId>beginning-io</artifactId>
+				<version>${beginning.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.milai</groupId>
+				<artifactId>beginning-util</artifactId>
+				<version>${beginning.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.milai</groupId>
+				<artifactId>beginning-http</artifactId>
+				<version>${beginning.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.13.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.30</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.9</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.5.13</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -6,11 +6,18 @@
 		<artifactId>beginning</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>beginning-util</artifactId>
-	<name>beginning-util</name>
-	<description>常用工具模块</description>
+	<artifactId>beginning-ex</artifactId>
+	<description>异常相关公共代码</description>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

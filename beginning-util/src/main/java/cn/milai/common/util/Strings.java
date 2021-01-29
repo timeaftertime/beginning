@@ -7,8 +7,7 @@ package cn.milai.common.util;
  */
 public final class Strings {
 
-	private Strings() {
-	}
+	private Strings() {}
 
 	/**
 	 * 获取字符串的切片

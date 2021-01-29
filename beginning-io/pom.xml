@@ -6,11 +6,18 @@
 		<artifactId>beginning</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>beginning-util</artifactId>
-	<name>beginning-util</name>
-	<description>常用工具模块</description>
+	<artifactId>beginning-io</artifactId>
+	<description>IO 相关公共代码</description>
 
 	<dependencies>
+		<dependency>
+			<groupId>cn.milai</groupId>
+			<artifactId>beginning-ex</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.milai</groupId>
+			<artifactId>beginning-util</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

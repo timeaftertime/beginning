@@ -7,8 +7,7 @@ package cn.milai.common.util;
  */
 public class Classes {
 
-	private Classes() {
-	}
+	private Classes() {}
 
 	/**
 	 * 判断参数 c 是否为 int 或 {@link Integer}

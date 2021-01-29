@@ -7,8 +7,7 @@ package cn.milai.common.util;
  */
 public final class Chars {
 
-	private Chars() {
-	}
+	private Chars() {}
 
 	/**
 	 * 小写字母按照（a-z）组成的字符串

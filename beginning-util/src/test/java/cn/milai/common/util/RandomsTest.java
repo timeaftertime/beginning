@@ -1,6 +1,7 @@
 package cn.milai.common.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Assert;
@@ -38,6 +39,21 @@ public class RandomsTest {
 			Assert.fail();
 		}
 		Assert.fail();
+	}
+
+	@Test
+	public void testNextLess() {
+		for (int i = 0; i < 1000; i++) {
+			assertTrue(Randoms.nextLess(1));
+			assertFalse(Randoms.nextLess(-0.00001));
+		}
+	}
+
+	@Test
+	public void testNextInt() {
+		for (int i = 1; i <= 100; i++) {
+			assertTrue(Randoms.nextInt(i) < i);
+		}
 	}
 
 }

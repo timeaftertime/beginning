@@ -11,8 +11,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class Digests {
 
-	private Digests() {
-	}
+	private Digests() {}
 
 	public static final Charset UTF_8 = Charset.forName("UTF-8");
 
