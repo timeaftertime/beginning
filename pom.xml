@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.milai</groupId>
 	<artifactId>beginning</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>pom</packaging>
 	<name>beginning</name>
 	<description>常用公共代码库</description>
@@ -16,8 +16,22 @@
 	</modules>
 
 	<properties>
-		<beginning.version>0.0.1-SNAPSHOT</beginning.version>
+		<beginning.version>0.0.1</beginning.version>
 	</properties>
+
+	<build>
+		<plugins>
+			<!-- 批量更新子模块版本号：mvn -N versions:update-child-modules   -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<generateBackupPoms>false</generateBackupPoms>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<dependencyManagement>
 		<dependencies>
