@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.milai</groupId>
 	<artifactId>beginning</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>beginning</name>
 	<description>常用公共代码库</description>
@@ -16,7 +16,7 @@
 	</modules>
 
 	<properties>
-		<beginning.version>0.0.1</beginning.version>
+		<beginning.version>0.0.2-SNAPSHOT</beginning.version>
 	</properties>
 
 	<build>
