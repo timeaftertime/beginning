@@ -109,7 +109,7 @@ public class Uncheckeds {
 	}
 
 	/**
-	 * 执行指定代码块，若发生异常，通过 {@link RethrownException} 包装并重新抛出
+	 * 执行指定代码块，若发生异常，打印日志并通过 {@link RethrownException#wrap(Throwable)} 包装并重新抛出
 	 * @param t
 	 * @throws RethrownException
 	 */
@@ -118,7 +118,7 @@ public class Uncheckeds {
 	}
 
 	/**
-	 * 执行指定代码块，若发生异常，通过 {@link RethrownException} 包装并重新抛出
+	 * 返回指定代码块返回结果，若发生异常，打印日志并通过 {@link RethrownException#wrap(Throwable)} 包装并重新抛出
 	 * @param t
 	 * @return  {@link ThrowableCallable} 返回值
 	 * @throws RethrownException
@@ -128,7 +128,7 @@ public class Uncheckeds {
 	}
 
 	/**
-	 * 执行指定代码块，若发生异常，打印日志并通过 {@link RethrownException} 和指定错误信息包装后重新抛出
+	 * 执行指定代码块，若发生异常，打印日志并通过 {@link RethrownException#wrap(Throwable, String)} 包装并重新抛出
 	 * @param log
 	 * @param t
 	 * @param format
@@ -146,7 +146,7 @@ public class Uncheckeds {
 	}
 
 	/**
-	 * 执行指定代码块，若发生异常，打印日志并通过 {@link RethrownException} 和指定错误信息包装后重新抛出
+	 * 返回指定代码块返回结果，若发生异常，打印日志并通过 {@link RethrownException#wrap(Throwable)} 包装并重新抛出
 	 * @param log
 	 * @param t
 	 * @param format
@@ -165,7 +165,7 @@ public class Uncheckeds {
 	}
 
 	private static RethrownException newRethrowException(Throwable e, String format, Object... args) {
-		return new RethrownException(buildErrMsg(format, args), e);
+		return RethrownException.wrap(e, buildErrMsg(format, args));
 	}
 
 	private static String buildErrMsg(String format, Object... args) {

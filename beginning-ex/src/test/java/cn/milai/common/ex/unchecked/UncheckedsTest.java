@@ -2,6 +2,8 @@ package cn.milai.common.ex.unchecked;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -26,6 +28,16 @@ public class UncheckedsTest {
 		}
 
 		public int getCallCnt() { return cnt; }
+	}
+
+	@Test
+	public void testWrap() {
+		Exception e = new Exception();
+		RethrownException re = RethrownException.wrap(e);
+		assertNotSame(e, re);
+		assertNotSame(re, RethrownException.wrap(e));
+		assertNotSame(re, RethrownException.wrap(re));
+		assertSame(re.getCause(), RethrownException.wrap(re).getCause());
 	}
 
 	@Test
@@ -92,9 +104,9 @@ public class UncheckedsTest {
 		String arg1 = "第一种";
 		try {
 			Uncheckeds.rethrow(() -> {
-				throw new RethrownException(null);
+				throw new Exception();
 			}, errMsg, arg1);
-		} catch (RethrownException e) {
+		} catch (Exception e) {
 			assertEquals(e.getMessage(), String.format(errMsg, arg1));
 			return;
 		}

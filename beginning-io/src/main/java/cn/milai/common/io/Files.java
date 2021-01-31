@@ -81,4 +81,24 @@ public class Files {
 		}, "读取文件失败, file = %s", file);
 	}
 
+	/**
+	 * 判断指定路径的文件是否存在
+	 * @see File#exists()
+	 * @param path
+	 * @return
+	 */
+	public static boolean exists(String path) {
+		return new File(path).exists();
+	}
+
+	/**
+	 * 创建指定目录的文件夹，返回是否真正创建了对应的文件夹
+	 * @see File#mkdir()
+	 * @param path
+	 * @return
+	 */
+	public static boolean mkdir(String path) {
+		return new File(path).mkdir();
+	}
+
 }

@@ -1,4 +1,4 @@
-package cn.milai.common.util;
+package cn.milai.common.base;
 
 /**
  * String 相关工具类
@@ -53,7 +53,7 @@ public final class Strings {
 	 * @param snakeStr
 	 * @return
 	 */
-	public static final String toUpperCamel(String snakeStr) {
+	public static String toUpperCamel(String snakeStr) {
 		String[] splits = snakeStr.split("_");
 		StringBuilder sb = new StringBuilder();
 		for (String word : splits) {
@@ -67,7 +67,7 @@ public final class Strings {
 	 * @param snakeStr
 	 * @return
 	 */
-	public static final String toLowerCamel(String snakeStr) {
+	public static String toLowerCamel(String snakeStr) {
 		return toFirstLower(toUpperCamel(snakeStr));
 	}
 
@@ -76,7 +76,7 @@ public final class Strings {
 	 * @param camelStr
 	 * @return
 	 */
-	public static final String toSnake(String camelStr) {
+	public static String toSnake(String camelStr) {
 		StringBuilder sb = new StringBuilder();
 		char[] chs = toFirstLower(camelStr).toCharArray();
 		for (int i = 0; i < chs.length; i++) {
@@ -93,7 +93,7 @@ public final class Strings {
 	 * @param word
 	 * @return
 	 */
-	public static final String toFirstUpper(String word) {
+	public static String toFirstUpper(String word) {
 		char[] chs = word.toCharArray();
 		chs[0] = Character.toUpperCase(chs[0]);
 		return new String(chs);
@@ -104,7 +104,7 @@ public final class Strings {
 	 * @param word
 	 * @return
 	 */
-	public static final String toFirstLower(String word) {
+	public static String toFirstLower(String word) {
 		char[] chs = word.toCharArray();
 		chs[0] = Character.toLowerCase(chs[0]);
 		return new String(chs);

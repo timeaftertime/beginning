@@ -1,4 +1,4 @@
-package cn.milai.common.util;
+package cn.milai.common.base;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -16,7 +16,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.milai</groupId>
-			<artifactId>beginning-util</artifactId>
+			<artifactId>beginning-base</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

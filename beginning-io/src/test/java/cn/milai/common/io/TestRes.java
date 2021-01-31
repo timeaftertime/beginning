@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.milai.common.util.Charsets;
+import cn.milai.common.base.Charsets;
 
 /**
  * IO 相关单元测试的资源

@@ -8,9 +8,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.milai.common.base.Charsets;
 import cn.milai.common.ex.unchecked.RethrownException;
 import cn.milai.common.ex.unchecked.Uncheckeds;
-import cn.milai.common.util.Charsets;
 
 /**
  * 输入流相关工具类

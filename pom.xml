@@ -9,7 +9,7 @@
 	<description>常用公共代码库</description>
 	<modules>
 		<module>beginning-api</module>
-		<module>beginning-util</module>
+		<module>beginning-base</module>
 		<module>beginning-io</module>
 		<module>beginning-ex</module>
 		<module>beginning-http</module>
@@ -52,7 +52,7 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.milai</groupId>
-				<artifactId>beginning-util</artifactId>
+				<artifactId>beginning-base</artifactId>
 				<version>${beginning.version}</version>
 			</dependency>
 			<dependency>

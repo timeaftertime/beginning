@@ -1,4 +1,4 @@
-package cn.milai.common.util;
+package cn.milai.common.base;
 
 import java.nio.charset.Charset;
 import java.security.MessageDigest;

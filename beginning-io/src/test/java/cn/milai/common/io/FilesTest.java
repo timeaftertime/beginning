@@ -13,8 +13,8 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import cn.milai.common.base.Charsets;
 import cn.milai.common.ex.unchecked.RethrownException;
-import cn.milai.common.util.Charsets;
 
 /**
  * {@link Files} 的测试类

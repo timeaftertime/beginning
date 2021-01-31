@@ -6,7 +6,7 @@
 		<artifactId>beginning</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>beginning-util</artifactId>
+	<artifactId>beginning-base</artifactId>
 	<name>beginning-util</name>
 	<description>常用工具模块</description>
 

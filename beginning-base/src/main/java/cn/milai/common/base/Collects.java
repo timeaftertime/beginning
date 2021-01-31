@@ -1,7 +1,6 @@
-package cn.milai.common.util;
+package cn.milai.common.base;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -9,11 +8,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * {@link Collection} 工具类
+ * 集合工具类
  * @author milai
  * @date 2021.01.29
  */
-public class Collections {
+public class Collects {
 
 	/**
 	 * 将 input 中每个元素使用 mapper 转换，返回所有结果组成的 list
@@ -28,7 +27,7 @@ public class Collections {
 	}
 
 	/**
-	 * 返回一个新 set ，其中包含 input 中所有满足 predicate 的元素
+	 * 返回一个新 Set ，其中包含 input 中所有满足 predicate 的元素
 	 * @param <T>
 	 * @param input
 	 * @param predicate
@@ -36,6 +35,17 @@ public class Collections {
 	 */
 	public static <T> Set<T> filter(Set<T> input, Predicate<T> predicate) {
 		return input.stream().filter(predicate).collect(Collectors.toSet());
+	}
+
+	/**
+	 * 返回一个新 List ，其中包含 input 中所有满足 predicate 的元素
+	 * @param <T>
+	 * @param input
+	 * @param predicate
+	 * @return
+	 */
+	public static <T> List<T> filter(List<T> input, Predicate<T> predicate) {
+		return input.stream().filter(predicate).collect(Collectors.toList());
 	}
 
 	/**
@@ -47,6 +57,17 @@ public class Collections {
 	 */
 	public static <T> Set<T> unfilter(Set<T> input, Predicate<T> predicate) {
 		return input.stream().filter(i -> !predicate.test(i)).collect(Collectors.toSet());
+	}
+
+	/**
+	 * 返回一个新 List ，其中包含 input 中所有不满足 predicate 的元素
+	 * @param <T>
+	 * @param input
+	 * @param predicate
+	 * @return
+	 */
+	public static <T> List<T> unfilter(List<T> input, Predicate<T> predicate) {
+		return input.stream().filter(i -> !predicate.test(i)).collect(Collectors.toList());
 	}
 
 	/**

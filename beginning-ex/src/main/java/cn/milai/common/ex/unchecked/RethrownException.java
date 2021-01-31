@@ -16,7 +16,7 @@ public class RethrownException extends RuntimeException {
 	 * 构造 cause by 指定异常的 {@link RethrownException}
 	 * @param e
 	 */
-	public RethrownException(Throwable e) {
+	private RethrownException(Throwable e) {
 		super(e);
 	}
 
@@ -25,8 +25,32 @@ public class RethrownException extends RuntimeException {
 	 * @param msg
 	 * @param e
 	 */
-	public RethrownException(String msg, Throwable e) {
+	private RethrownException(String msg, Throwable e) {
 		super(msg, e);
+	}
+
+	/**
+	 * 获取异常的 {@link RethrownException} 包装。
+	 * 若异常已经是 {@link RethrownException} 则包装其 {@link Throwable#getCause()}
+	 * @param e
+	 * @return
+	 */
+	public static RethrownException wrap(Throwable e) {
+		return wrap(e, "");
+	}
+
+	/**
+	 * 获取异常的 {@link RethrownException} 包装。
+	 * 若异常已经是 {@link RethrownException} 则包装其 {@link Throwable#getCause()}
+	 * @param e
+	 * @param msg 需要包装到 {@link RethrownException} 中的消息
+	 * @return
+	 */
+	public static RethrownException wrap(Throwable e, String msg) {
+		if (e instanceof RethrownException) {
+			return new RethrownException(msg, e.getCause());
+		}
+		return new RethrownException(msg, e);
 	}
 
 }

@@ -1,4 +1,4 @@
-package cn.milai.common.util;
+package cn.milai.common.base;
 
 import java.util.Random;
 
