@@ -20,10 +20,10 @@ import org.junit.Test;
 public class CollectsTest {
 
 	@Test
-	public void testExtract() {
+	public void testMapList() {
 		List<Integer> origin = Arrays.asList(0, 1, 2, 3, 4, 5);
 		List<Integer> back = new ArrayList<>(origin);
-		List<Integer> extracted = Collects.extract(origin, i -> i + 1);
+		List<Integer> extracted = Collects.mapList(origin, i -> i + 1);
 		for (int i = 0; i < extracted.size(); i++) {
 			assertEquals(i + 1, (int) extracted.get(i));
 		}
@@ -72,12 +72,12 @@ public class CollectsTest {
 	}
 
 	@Test
-	public void testUnion() {
+	public void testMerge() {
 		List<String> list1 = Arrays.asList("a", "b", "def");
 		List<String> list2 = Arrays.asList("1", "2", "000");
 		List<String> back1 = new ArrayList<>(list1);
 		List<String> back2 = new ArrayList<>(list2);
-		List<String> union = Collects.union(list1, list2);
+		List<String> union = Collects.merge(list1, list2);
 		assertEquals(list1.size() + list2.size(), union.size());
 		for (int i = 0; i < list1.size() + list2.size(); i++) {
 			assertEquals(i >= list1.size() ? list2.get(i - list1.size()) : list1.get(i), union.get(i));

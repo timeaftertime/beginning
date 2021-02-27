@@ -1,6 +1,7 @@
 package cn.milai.common.base;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -22,7 +23,7 @@ public class Collects {
 	 * @param mapper
 	 * @return
 	 */
-	public static <I, O> List<O> extract(List<I> input, Function<I, O> mapper) {
+	public static <I, O> List<O> mapList(Collection<I> input, Function<I, O> mapper) {
 		return input.stream().map(mapper).collect(Collectors.toList());
 	}
 
@@ -77,7 +78,7 @@ public class Collects {
 	 * @param list2
 	 * @return
 	 */
-	public static <T> List<T> union(List<? extends T> list1, List<? extends T> list2) {
+	public static <T> List<T> merge(List<? extends T> list1, List<? extends T> list2) {
 		List<T> list = new ArrayList<>();
 		list.addAll(list1);
 		list.addAll(list2);

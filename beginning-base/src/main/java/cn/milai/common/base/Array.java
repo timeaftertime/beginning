@@ -5,7 +5,7 @@ package cn.milai.common.base;
  * @author milai
  * @date 2021.01.31
  */
-public class Arrays {
+public class Array {
 
 	/**
 	 * 返回一个新字节数组，其元素为参数数组其后拼接参数所有元素

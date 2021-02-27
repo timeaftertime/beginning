@@ -13,6 +13,7 @@
 		<module>beginning-io</module>
 		<module>beginning-ex</module>
 		<module>beginning-http</module>
+		<module>beginning-thread</module>
 	</modules>
 
 	<properties>
