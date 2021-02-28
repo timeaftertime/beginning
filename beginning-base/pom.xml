@@ -7,7 +7,7 @@
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>beginning-base</artifactId>
-	<name>beginning-util</name>
+	<name>beginning-base</name>
 	<description>常用工具模块</description>
 
 	<dependencies>
