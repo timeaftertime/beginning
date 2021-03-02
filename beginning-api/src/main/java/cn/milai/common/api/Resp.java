@@ -32,15 +32,12 @@ public class Resp<T> {
 	 * 判断当前状态是否为成功
 	 * @return
 	 */
-	public boolean isSuccess() {
-		return code != null && SUCCESS.equals(code);
-	}
+	public boolean isSuccess() { return code != null && SUCCESS.equals(code); }
 
 	/**
 	 * 构造一个所有字段为默认值的响应
 	 */
-	public Resp() {
-	}
+	public Resp() {}
 
 	/**
 	 * 构造一个指定状态、描述和数据的响应
@@ -84,7 +81,7 @@ public class Resp<T> {
 	 * @return
 	 */
 	public static <T> Resp<T> fail(RespCode code, String... descArgs) {
-		return new Resp<>(code.getCode(), String.format(code.getDesc(), (Object) descArgs), null);
+		return new Resp<>(code.getCode(), String.format(code.getDesc(), (Object[]) descArgs), null);
 	}
 
 	/**
@@ -110,36 +107,24 @@ public class Resp<T> {
 	 * 获取响应唯一标识
 	 * @return
 	 */
-	public String getCode() {
-		return code;
-	}
+	public String getCode() { return code; }
 
 	/**
 	 * 获取响应描述
 	 * @return
 	 */
-	public String getDesc() {
-		return desc;
-	}
+	public String getDesc() { return desc; }
 
 	/**
 	 * 获取响应的数据
 	 * @return
 	 */
-	public T getData() {
-		return data;
-	}
+	public T getData() { return data; }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+	public void setCode(String code) { this.code = code; }
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
+	public void setDesc(String desc) { this.desc = desc; }
 
-	public void setData(T data) {
-		this.data = data;
-	}
+	public void setData(T data) { this.data = data; }
 
 }

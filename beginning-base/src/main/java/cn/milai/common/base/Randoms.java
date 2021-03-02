@@ -64,8 +64,17 @@ public final class Randoms {
 	 * @param length
 	 * @return
 	 */
-	public static String randLowerOrDigit(int length) {
+	public static String fixedLowerDigit(int length) {
 		return randStr(Chars.LOWERS + Chars.DIGITS, length);
+	}
+
+	/**
+	 * 获取长度在 [0, {@code maxLength}] 之间由小写字母和数字组成的随机字符串
+	 * @param maxLength
+	 * @return
+	 */
+	public static String randLowerDigit(int maxLength) {
+		return fixedLowerDigit(Randoms.nextInt(maxLength + 1));
 	}
 
 	/**
@@ -84,6 +93,14 @@ public final class Randoms {
 	 */
 	public static int nextInt(int limit) {
 		return getRand().nextInt(limit);
+	}
+
+	/**
+	 * 返回下一个 [0, {@link Integer#MAX_VALUE}] 的随机整数
+	 * @return
+	 */
+	public static int nextInt() {
+		return nextInt(Integer.MAX_VALUE);
 	}
 
 }

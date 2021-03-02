@@ -19,4 +19,29 @@ public class Array {
 		System.arraycopy(a2, 0, a, a1.length, a2.length);
 		return a;
 	}
+
+	/**
+	 * 判断指定数组是否包含指定元素
+	 * @param <T>
+	 * @param array
+	 * @param e
+	 * @return
+	 */
+	public static <T> boolean contains(T[] array, T e) {
+		if (e == null) {
+			for (T t : array) {
+				if (t == null) {
+					return true;
+				}
+			}
+			return false;
+		}
+		for (T t : array) {
+			if (t.equals(e)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
