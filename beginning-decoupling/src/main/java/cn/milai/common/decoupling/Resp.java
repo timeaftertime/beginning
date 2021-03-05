@@ -1,4 +1,4 @@
-package cn.milai.common.api;
+package cn.milai.common.decoupling;
 
 /**
  * 接口统一返回模型

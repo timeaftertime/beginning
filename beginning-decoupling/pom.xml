@@ -6,9 +6,9 @@
 		<artifactId>beginning</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>beginning-api</artifactId>
-	<name>beginning-api</name>
-	<description>api 相关代码</description>
+	<artifactId>beginning-decoupling</artifactId>
+	<name>beginning-decoupling</name>
+	<description>接口与解耦相关代码</description>
 
 	<dependencies>
 		<dependency>

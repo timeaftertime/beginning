@@ -2,6 +2,7 @@ package cn.milai.common.base;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,6 +87,14 @@ public class CollectsTest {
 		assertNotSame(list2, union);
 		assertEquals(back1, list1);
 		assertEquals(back2, list2);
+	}
+
+	@Test
+	public void testAdd() {
+		List<String> list = new ArrayList<>();
+		List<String> list2 = Arrays.asList("abc");
+		assertEquals(list2, Collects.add(list, "abc"));
+		assertTrue(list.isEmpty());
 	}
 
 }

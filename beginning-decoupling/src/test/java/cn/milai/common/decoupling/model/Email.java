@@ -1,4 +1,4 @@
-package cn.milai.common.api.model;
+package cn.milai.common.decoupling.model;
 
 /**
  * 邮箱 数据模型

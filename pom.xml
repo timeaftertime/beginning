@@ -8,7 +8,7 @@
 	<name>beginning</name>
 	<description>常用公共代码库</description>
 	<modules>
-		<module>beginning-api</module>
+		<module>beginning-decoupling</module>
 		<module>beginning-base</module>
 		<module>beginning-io</module>
 		<module>beginning-ex</module>
@@ -67,7 +67,7 @@
 		<dependencies>
 			<dependency>
 				<groupId>cn.milai</groupId>
-				<artifactId>beginning-api</artifactId>
+				<artifactId>beginning-decoupling</artifactId>
 				<version>${beginning.version}</version>
 			</dependency>
 			<dependency>

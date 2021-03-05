@@ -84,4 +84,20 @@ public class Collects {
 		list.addAll(list2);
 		return list;
 	}
+
+	/**
+	 * 返回一个新 {@link List}，其元素为 {@code list}中的元素加上 {@code elements}
+	 * @param <T>
+	 * @param list
+	 * @param elements
+	 * @return
+	 */
+	@SafeVarargs
+	public static <T> List<T> add(List<T> list, T... elements) {
+		List<T> res = new ArrayList<>(list);
+		for (T t : elements) {
+			res.add(t);
+		}
+		return res;
+	}
 }

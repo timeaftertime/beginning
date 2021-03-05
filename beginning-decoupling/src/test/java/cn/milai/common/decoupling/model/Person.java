@@ -1,4 +1,4 @@
-package cn.milai.common.api.model;
+package cn.milai.common.decoupling.model;
 
 import java.util.List;
 import java.util.Map;
