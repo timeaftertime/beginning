@@ -26,12 +26,17 @@ public class StringsTest {
 	}
 
 	@Test
-	public void testToLine() {
-		assertEquals("abc中文~~~", Strings.toLine(Arrays.asList("abc", "中文", "~~~")));
+	public void testAppends() {
+		assertEquals("abc中文~~~", Strings.appends(Arrays.asList("abc", "中文", "~~~")));
+	}
+
+	@Test
+	public void testjoinLineSeparator() {
+		assertEquals("abc\n123\n中文", Strings.joinLineSeparator(Arrays.asList("abc", "123", "中文")));
 	}
 
 	@Test
 	public void testToLines() {
-		assertEquals("abc\n123\n中文", Strings.toLines(Arrays.asList("abc", "123", "中文")));
+		assertEquals(Arrays.asList("abc", "123", "中文"), Strings.toLines("abc\n123\n中文"));
 	}
 }

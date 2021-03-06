@@ -25,6 +25,26 @@ public final class Chars {
 	public static final String DIGITS = "0123456789";
 
 	/**
+	 *  \n 换行符
+	 */
+	public static final String LF = "\n";
+
+	/**
+	 * \r 回车符
+	 */
+	public static final String CR = "\r";
+
+	/**
+	 * \n 换行符
+	 */
+	public static final char C_LF = LF.charAt(0);
+
+	/**
+	 * \r 回车符
+	 */
+	public static final char C_CR = CR.charAt(0);
+
+	/**
 	 * 字母按照（a-z A-Z)的组成的字符串
 	 */
 	public static final String LETTERS = LOWERS + UPPERS;

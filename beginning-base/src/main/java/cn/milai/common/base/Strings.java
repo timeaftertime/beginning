@@ -1,5 +1,8 @@
 package cn.milai.common.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * String 相关工具类
  * @author milai
@@ -53,8 +56,8 @@ public final class Strings {
 	 * @param lines
 	 * @return
 	 */
-	public static String toLines(Iterable<String> lines) {
-		return String.join("\n", lines);
+	public static String joinLineSeparator(Iterable<String> lines) {
+		return String.join(Chars.LF, lines);
 	}
 
 	/**
@@ -62,8 +65,21 @@ public final class Strings {
 	 * @param lines
 	 * @return
 	 */
-	public static String toLine(Iterable<String> lines) {
+	public static String appends(Iterable<String> lines) {
 		return String.join("", lines);
+	}
+
+	/**
+	 * 将字符串以换行切割，返回切割后字符串的列表
+	 * @param str
+	 * @return
+	 */
+	public static final List<String> toLines(String str) {
+		List<String> strs = new ArrayList<>();
+		for (String line : str.split("\n")) {
+			strs.add(line);
+		}
+		return strs;
 	}
 
 }

@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses(
 	value = {
 		DigestsTest.class, StringsTest.class, CharsTest.class, RandomsTest.class, ClassesTest.class, CollectsTest.class,
-		ArrayTest.class, BytesTest.class, NamingsTest.class
+		ArrayUtilTest.class, BytesTest.class, NamingsTest.class
 	}
 )
 public class AllTestSuite {

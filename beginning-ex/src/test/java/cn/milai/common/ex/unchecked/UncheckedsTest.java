@@ -30,6 +30,18 @@ public class UncheckedsTest {
 		public int getCallCnt() { return cnt; }
 	}
 
+	static class MyException extends RuntimeException {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public MyException(Throwable e) {
+			super(e);
+		}
+	}
+
 	@Test
 	public void testWrap() {
 		Exception e = new Exception();
@@ -109,6 +121,29 @@ public class UncheckedsTest {
 		} catch (Exception e) {
 			assertEquals(e.getMessage(), String.format(errMsg, arg1));
 			return;
+		}
+		Assert.fail();
+	}
+
+	@Test
+	public void testRethrowRuntime() {
+		String msg = "xxxxAAA999";
+		Exception exception = new Exception();
+		try {
+			Uncheckeds.rethrow(() -> {
+				throw exception;
+			}, (e) -> new MyException(e));
+		} catch (MyException myException) {
+			assertSame(exception, myException.getCause());
+			try {
+				Uncheckeds.rethrow(() -> {
+					throw new RuntimeException(msg);
+				}, (e) -> new RuntimeException(e));
+			} catch (RuntimeException runtimeException) {
+				assertEquals(msg, runtimeException.getCause().getMessage());
+				return;
+			}
+			Assert.fail();
 		}
 		Assert.fail();
 	}

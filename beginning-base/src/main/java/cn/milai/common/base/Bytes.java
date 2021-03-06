@@ -56,7 +56,7 @@ public class Bytes {
 	public static byte[] fromLong(long value) {
 		int highBits = (int) ((0xffffffff00000000L & value) >> 32);
 		int lowBits = (int) (0x00000000ffffffffffffL & value);
-		return Array.union(fromInt(highBits), fromInt(lowBits));
+		return ArrayUtil.union(fromInt(highBits), fromInt(lowBits));
 	}
 
 	/**

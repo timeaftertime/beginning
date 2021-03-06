@@ -23,7 +23,7 @@ public class Uncheckeds {
 	 * @param t
 	 */
 	public static void log(ThrowableRunnable t) {
-		log(t, null);
+		log(t, "");
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class Uncheckeds {
 	 * @return {@link ThrowableCallable} 返回值，若发生异常，返回 null
 	 */
 	public static <T> T log(ThrowableCallable<T> t) {
-		return log(t, null);
+		return log(t, "");
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class Uncheckeds {
 	 * @param t
 	 */
 	public static void logWith(Logger log, ThrowableRunnable t) {
-		logWith(log, t, null);
+		logWith(log, t, "");
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Uncheckeds {
 	 * @return {@link ThrowableCallable} 返回值，若发生异常，返回 null
 	 */
 	public static <T> T logWith(Logger log, ThrowableCallable<T> t) {
-		return logWith(log, t, null);
+		return logWith(log, t, "");
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class Uncheckeds {
 	 * @throws RethrownException
 	 */
 	public static void rethrow(ThrowableRunnable t) throws RethrownException {
-		rethrow(t, null);
+		rethrow(t, "");
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class Uncheckeds {
 	 * @throws RethrownException
 	 */
 	public static <T> T rethrow(ThrowableCallable<T> t) throws RethrownException {
-		return rethrow(t, null);
+		return rethrow(t, "");
 	}
 
 	/**
@@ -164,12 +164,34 @@ public class Uncheckeds {
 		}
 	}
 
+	/**
+	 * 执行指定代码块，若发生异常，使用 {@link ExceptionCreator} 创建的异常包装并抛出
+	 * @param t
+	 * @param creator
+	 * @throws RuntimeException
+	 */
+	public static void rethrow(ThrowableRunnable t, ExceptionCreator creator) throws RuntimeException {
+		try {
+			t.run();
+		} catch (Exception e) {
+			throw (RuntimeException) creator.create(e).fillInStackTrace();
+		}
+	}
+
+	public static <T> T rethrow(ThrowableCallable<T> t, ExceptionCreator creator) throws RuntimeException {
+		try {
+			return t.call();
+		} catch (Exception e) {
+			throw (RuntimeException) creator.create(e).fillInStackTrace();
+		}
+	}
+
 	private static RethrownException newRethrowException(Throwable e, String format, Object... args) {
 		return RethrownException.wrap(e, buildErrMsg(format, args));
 	}
 
 	private static String buildErrMsg(String format, Object... args) {
-		return format == null ? DEF_ERR_MSG : String.format(format, args);
+		return format.isEmpty() ? DEF_ERR_MSG : String.format(format, args);
 	}
 
 }
