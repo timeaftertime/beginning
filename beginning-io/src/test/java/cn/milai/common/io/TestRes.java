@@ -1,10 +1,9 @@
 package cn.milai.common.io;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import cn.milai.common.base.Charsets;
 
 /**
  * IO 相关单元测试的资源
@@ -22,7 +21,7 @@ public class TestRes {
 	public static final List<String> THIS_IS_LINES = Arrays.asList("这是中文。", "This is English.", "これは日本語です.");
 
 	public static final byte[] THIS_IS_BYTES = String.join(System.lineSeparator(), THIS_IS_LINES).getBytes(
-		Charsets.UTF_8
+		StandardCharsets.UTF_8
 	);
 
 	/**

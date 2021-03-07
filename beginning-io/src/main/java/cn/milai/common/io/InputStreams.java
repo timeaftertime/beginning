@@ -5,10 +5,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.milai.common.base.Charsets;
 import cn.milai.common.ex.unchecked.RethrownException;
 import cn.milai.common.ex.unchecked.Uncheckeds;
 
@@ -82,7 +82,7 @@ public class InputStreams {
 	public static List<String> readLines(InputStream in) throws RethrownException {
 		return Uncheckeds.rethrow(() -> {
 			List<String> lines = new ArrayList<>();
-			try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, Charsets.UTF_8))) {
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
 				String line = null;
 				while ((line = reader.readLine()) != null) {
 					lines.add(line);

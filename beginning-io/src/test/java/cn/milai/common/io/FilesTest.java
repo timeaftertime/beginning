@@ -9,11 +9,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import cn.milai.common.base.Charsets;
 import cn.milai.common.ex.unchecked.RethrownException;
 
 /**
@@ -49,7 +49,7 @@ public class FilesTest {
 		if (file.exists()) {
 			file.delete();
 		}
-		byte[] bytes = "这是一段需要写的文件，\n包含 English，,.?".getBytes(Charsets.UTF_8);
+		byte[] bytes = "这是一段需要写的文件，\n包含 English，,.?".getBytes(StandardCharsets.UTF_8);
 		Files.saveRethrow(pathname, bytes);
 		assertTrue(file.exists());
 		assertArrayEquals(bytes, read(file));
@@ -65,7 +65,7 @@ public class FilesTest {
 		file.createNewFile();
 		assertTrue(file.exists());
 		assertArrayEquals(new byte[] {}, Files.toBytes(file));
-		byte[] bytes = "some data....".getBytes(Charsets.UTF_8);
+		byte[] bytes = "some data....".getBytes(StandardCharsets.UTF_8);
 		Files.saveRethrow(pathname, bytes, false);
 		assertArrayEquals(new byte[] {}, Files.toBytes(file));
 		Files.saveRethrow(pathname, bytes, true);

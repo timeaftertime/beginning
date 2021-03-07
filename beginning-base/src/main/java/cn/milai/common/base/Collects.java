@@ -34,7 +34,7 @@ public class Collects {
 	 * @param predicate
 	 * @return
 	 */
-	public static <T> Set<T> filter(Set<T> input, Predicate<T> predicate) {
+	public static <T> Set<T> filterSet(Collection<T> input, Predicate<T> predicate) {
 		return input.stream().filter(predicate).collect(Collectors.toSet());
 	}
 
@@ -45,7 +45,7 @@ public class Collects {
 	 * @param predicate
 	 * @return
 	 */
-	public static <T> List<T> filter(List<T> input, Predicate<T> predicate) {
+	public static <T> List<T> filterList(Collection<T> input, Predicate<T> predicate) {
 		return input.stream().filter(predicate).collect(Collectors.toList());
 	}
 
@@ -53,22 +53,53 @@ public class Collects {
 	 * 返回一个新 set ，其中包含 input 中所有不满足 predicate 的元素
 	 * @param <T>
 	 * @param input
-	 * @param predicate
+	 * @param p
 	 * @return
 	 */
-	public static <T> Set<T> unfilter(Set<T> input, Predicate<T> predicate) {
-		return input.stream().filter(i -> !predicate.test(i)).collect(Collectors.toSet());
+	public static <T> Set<T> unfilterSet(Collection<T> input, Predicate<T> p) {
+		return filterSet(input, e -> !p.test(e));
 	}
 
 	/**
 	 * 返回一个新 List ，其中包含 input 中所有不满足 predicate 的元素
 	 * @param <T>
 	 * @param input
-	 * @param predicate
+	 * @param p
 	 * @return
 	 */
-	public static <T> List<T> unfilter(List<T> input, Predicate<T> predicate) {
-		return input.stream().filter(i -> !predicate.test(i)).collect(Collectors.toList());
+	public static <T> List<T> unfilterList(Collection<T> input, Predicate<T> p) {
+		return filterList(input, e -> !p.test(e));
+	}
+
+	/**
+	 * 将指定 {@link Collection} 中不满足指定条件的元素移除，返回去除后的原 list
+	 * @param <C>
+	 * @param <T>
+	 * @param input
+	 * @param p
+	 * @return
+	 */
+	public static <C extends Collection<T>, T> C remainMet(C input, Predicate<T> p) {
+		List<T> toRemove = new ArrayList<>();
+		for (T i : input) {
+			if (!p.test(i)) {
+				toRemove.add(i);
+			}
+		}
+		input.removeAll(toRemove);
+		return input;
+	}
+
+	/**
+	 * 将指定 {@link Collection} 中满足指定条件的元素移除，返回去除后的原 list
+	 * @param <C>
+	 * @param <T>
+	 * @param input
+	 * @param p
+	 * @return
+	 */
+	public static <C extends Collection<T>, T> C removeMet(C input, Predicate<T> p) {
+		return remainMet(input, e -> !p.test(e));
 	}
 
 	/**
