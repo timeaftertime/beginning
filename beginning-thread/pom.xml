@@ -8,4 +8,12 @@
 	</parent>
 	<artifactId>beginning-thread</artifactId>
 	<description>线程相关公共代码</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

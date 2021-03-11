@@ -23,7 +23,7 @@ public class DownCounter implements Counter {
 	}
 
 	/**
-	 * 构造一个初始值为 {@code cnt} 且在计数归 0 时调用指定回调函数的 {@link DownCounter}。
+	 * 构造一个初始值为 {@code cnt} 且在计数第一次变为 0 时调用指定回调函数的 {@link DownCounter}。
 	 * 当前 {@link DownCounter} 将作为回调的参数
 	 * @param cnt
 	 * @param callback
@@ -50,11 +50,20 @@ public class DownCounter implements Counter {
 	public long getCount() { return cnt.longValue(); }
 
 	@Override
-	public boolean isMet() { return getCount() <= 0; }
+	public boolean isMet() { return getCount() == 0; }
 
 	@Override
 	public void reset() {
 		cnt.set(INIT_VAL);
+	}
+
+	@Override
+	public void toMet() {
+		if (cnt.getAndUpdate(pre -> 0) > 0) {
+			if (callback != null) {
+				callback.accept(this);
+			}
+		}
 	}
 
 }

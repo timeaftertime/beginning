@@ -1,11 +1,13 @@
 package cn.milai.common.thread.counter;
 
+import cn.milai.common.thread.Condition;
+
 /**
  * 线程安全的计数器
  * @author milai
  * @date 2021.02.26
  */
-public interface Counter {
+public interface Counter extends Condition {
 
 	/**
 	 * 计数一次
@@ -19,13 +21,8 @@ public interface Counter {
 	default long getCount() { return 0; }
 
 	/**
-	 * 当前是否已经满足条件
-	 * @return
-	 */
-	default boolean isMet() { return false; }
-
-	/**
 	 * 重置当前计数器
 	 */
 	default void reset() {}
+
 }
