@@ -21,7 +21,7 @@ public interface Condition {
 	}
 
 	/**
-	 * 使当前条件变为满足并让所有调用 {@link #isMet()} 的线程返回
+	 * 使当前条件变为满足并让所有调用 {@link #await()} 的线程返回
 	 */
 	default void toMet() {}
 
