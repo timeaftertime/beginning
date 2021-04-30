@@ -68,7 +68,7 @@ public class InputStreams {
 	 * @param data
 	 * @return
 	 */
-	public static InputStream toInputStream(byte[] data) {
+	public static InputStream fromBytes(byte[] data) {
 		return new ByteArrayInputStream(data);
 	}
 
