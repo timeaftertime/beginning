@@ -108,4 +108,27 @@ public final class Chars {
 		return c >= '0' && c <= '9';
 	}
 
+	/**
+	 * 转换指定大写字母为对应的小写字母字符，若不是大写字母，返回原字符
+	 * @param c
+	 * @return
+	 */
+	public static char toLower(char c) {
+		if (!isUpper(c)) {
+			return c;
+		}
+		return (char) (c + 32);
+	}
+
+	/**
+	 * 转换指定小写字母为对应的大写字母字符，若不是小写字母，返回原字符
+	 * @param c
+	 * @return
+	 */
+	public static char toUpper(char c) {
+		if (!isLower(c)) {
+			return c;
+		}
+		return (char) (c - 32);
+	}
 }

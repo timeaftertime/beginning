@@ -1,5 +1,6 @@
 package cn.milai.common.base;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -30,6 +31,28 @@ public class CharsTest {
 			assertFalse(Chars.isUpper(c));
 			assertFalse(Chars.isDigit(c));
 		}
+	}
+
+	@Test
+	public void testToLower() {
+		assertEquals('c', Chars.toLower('C'));
+		assertEquals('d', Chars.toLower('D'));
+		assertEquals('_', Chars.toLower('_'));
+		assertEquals('-', Chars.toLower('-'));
+		assertEquals('1', Chars.toLower('1'));
+		assertEquals(' ', Chars.toLower(' '));
+		assertEquals('\t', Chars.toLower('\t'));
+	}
+
+	@Test
+	public void testToUpper() {
+		assertEquals('P', Chars.toUpper('p'));
+		assertEquals('F', Chars.toUpper('f'));
+		assertEquals('=', Chars.toUpper('='));
+		assertEquals('|', Chars.toUpper('|'));
+		assertEquals('2', Chars.toUpper('2'));
+		assertEquals(' ', Chars.toUpper(' '));
+		assertEquals('\n', Chars.toUpper('\n'));
 	}
 
 }

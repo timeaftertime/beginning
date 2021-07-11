@@ -3,6 +3,8 @@ package cn.milai.common.io;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -70,6 +72,15 @@ public class InputStreams {
 	 */
 	public static InputStream fromBytes(byte[] data) {
 		return new ByteArrayInputStream(data);
+	}
+
+	/**
+	 * 将 File 转换为 {@link FileInputStream}
+	 * @param file
+	 * @return
+	 */
+	public static InputStream fromFile(File file) {
+		return Uncheckeds.rethrow(() -> new FileInputStream(file));
 	}
 
 	/**

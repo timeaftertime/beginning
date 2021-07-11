@@ -30,4 +30,5 @@ public class ClassesTest {
 		assertTrue(Classes.isSingle(Double.class));
 		assertTrue(Classes.isSingle(Boolean.class));
 	}
+
 }

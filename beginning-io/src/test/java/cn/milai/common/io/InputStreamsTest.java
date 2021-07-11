@@ -2,7 +2,9 @@ package cn.milai.common.io;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -37,6 +39,17 @@ public class InputStreamsTest {
 
 	private static FileInputStream thisIsInputStream() throws FileNotFoundException {
 		return new FileInputStream(TestRes.getTestFilePath(TestRes.THIS_IS));
+	}
+
+	@Test
+	public void testFromFile() {
+		try {
+			InputStreams.fromFile(new File(TestRes.getTestFilePath(TestRes.NOT_EXISTS_FILE)));
+		} catch (RethrownException e) {
+			assertEquals(FileNotFoundException.class, e.getCause().getClass());
+			return;
+		}
+		fail();
 	}
 
 }
