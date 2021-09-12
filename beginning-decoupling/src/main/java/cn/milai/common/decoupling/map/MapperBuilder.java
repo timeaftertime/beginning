@@ -3,7 +3,7 @@ package cn.milai.common.decoupling.map;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.milai.common.base.Collects;
+import cn.milai.beginning.collection.Merge;
 import cn.milai.common.decoupling.map.Mappers.IMapper;
 
 /**
@@ -52,7 +52,7 @@ public class MapperBuilder<S, T> {
 	}
 
 	private MapperBuilder(MapperBuilder<S, T> builder, Mapper<S, T> mapper) {
-		this(builder.sourceClass, builder.targetClass, Collects.add(builder.mappers, mapper));
+		this(builder.sourceClass, builder.targetClass, Merge.list(builder.mappers, mapper));
 	}
 
 	private MapperBuilder(Class<S> sourceClass, Class<T> targetClass, List<Mapper<S, T>> mappers) {

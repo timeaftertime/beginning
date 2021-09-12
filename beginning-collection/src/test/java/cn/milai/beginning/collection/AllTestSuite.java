@@ -1,4 +1,4 @@
-package cn.milai.common.base;
+package cn.milai.beginning.collection;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -7,8 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses(
 	value = {
-		DigestsTest.class, StringsTest.class, CharsTest.class, RandomsTest.class, ClassesTest.class,
-		BytesTest.class, NamingsTest.class
+		FilterTest.class, MergeTest.class, MappingTest.class
 	}
 )
 public class AllTestSuite {

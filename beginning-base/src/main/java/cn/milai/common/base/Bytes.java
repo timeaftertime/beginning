@@ -1,5 +1,7 @@
 package cn.milai.common.base;
 
+import cn.milai.beginning.collection.Merge;
+
 /**
  * 字节转换工具类
  * 2020.01.02
@@ -56,7 +58,7 @@ public class Bytes {
 	public static byte[] fromLong(long value) {
 		int highBits = (int) ((0xffffffff00000000L & value) >> 32);
 		int lowBits = (int) (0x00000000ffffffffffffL & value);
-		return ArrayUtil.union(fromInt(highBits), fromInt(lowBits));
+		return Merge.array(fromInt(highBits), fromInt(lowBits));
 	}
 
 	/**

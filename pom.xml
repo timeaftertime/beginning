@@ -14,6 +14,8 @@
 		<module>beginning-ex</module>
 		<module>beginning-http</module>
 		<module>beginning-thread</module>
+		<module>beginning-collection</module>
+		<module>beginning-all</module>
 	</modules>
 
 	<properties>
@@ -87,7 +89,17 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.milai.beginning</groupId>
+				<artifactId>beginning-collection</artifactId>
+				<version>${beginning.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.milai.beginning</groupId>
 				<artifactId>beginning-http</artifactId>
+				<version>${beginning.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.milai.beginning</groupId>
+				<artifactId>beginning-thread</artifactId>
 				<version>${beginning.version}</version>
 			</dependency>
 			<dependency>

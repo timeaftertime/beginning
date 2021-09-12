@@ -6,19 +6,14 @@
 		<artifactId>beginning-parent</artifactId>
 		<version>0.0.5-SNAPSHOT</version>
 	</parent>
-	<artifactId>beginning-base</artifactId>
-	<name>beginning-base</name>
-	<description>常用工具模块</description>
+	<artifactId>beginning-collection</artifactId>
+	<description>集合相关工具类</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>cn.milai.beginning</groupId>
-			<artifactId>beginning-collection</artifactId>
 		</dependency>
 	</dependencies>
 </project>
