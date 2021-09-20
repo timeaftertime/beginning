@@ -19,17 +19,21 @@ public class CharsTest {
 			assertFalse(Chars.isUpper(lower));
 			assertFalse(Chars.isDigit(lower));
 			assertFalse(Chars.isDigit(upper));
+			assertTrue(Chars.isLetter(lower));
+			assertTrue(Chars.isLetter(upper));
 		}
 		for (int i = 0; i < 9; i++) {
 			char digit = (char) ('0' + i);
 			assertFalse(Chars.isLower(digit));
 			assertFalse(Chars.isUpper(digit));
 			assertTrue(Chars.isDigit(digit));
+			assertFalse(Chars.isLetter(digit));
 		}
 		for (char c : "`-=~!@#$%^&*()_+[]{}\\|;\'\",.<>/?中 文".toCharArray()) {
 			assertFalse(Chars.isLower(c));
 			assertFalse(Chars.isUpper(c));
 			assertFalse(Chars.isDigit(c));
+			assertFalse(Chars.isLetter(c));
 		}
 	}
 

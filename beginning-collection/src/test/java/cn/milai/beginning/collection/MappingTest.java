@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,22 @@ public class MappingTest {
 		Set<Integer> reduced = Mapping.reduceSet(
 			set1, list -> list.stream().map(i -> i * 2).collect(Collectors.toList())
 		);
-		assertEquals(TestUtil.newSet(2, 20, 200, 4, 40,400), reduced);
+		assertEquals(TestUtil.newSet(2, 20, 200, 4, 40, 400), reduced);
+	}
+
+	@Test
+	public void testGroup() {
+		String marks = "!@#$%";
+		String nums = "12345";
+		String subs = "------";
+		String letters = "qwertyui";
+		List<String> list = Arrays.asList(marks, nums, subs, letters);
+		Map<Integer, List<String>> map = Mapping.map(list.stream(), s -> s.length());
+		assertEquals(3, map.size());
+		assertEquals(map.get(5), Arrays.asList(marks, nums));
+		assertEquals(map.get(6), Arrays.asList(subs));
+		assertEquals(map.get(8), Arrays.asList(letters));
+		assertEquals(map, Mapping.group(list, s -> s.length()));
 	}
 
 	private Character[] toCharacters(String s) {

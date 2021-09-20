@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 集合映射工具类
@@ -93,6 +95,30 @@ public class Mapping {
 	 */
 	public static <T, R> Set<R> set(T[] a, Function<T, R> mapper) {
 		return set(Arrays.asList(a), mapper);
+	}
+
+	/**
+	 * 使用 {@link Collection} 中每个元素调用指定 {@link Function}，以结果为分组 key 构造 {@link Map} 
+	 * @param <T>
+	 * @param <K>
+	 * @param c
+	 * @param mapper
+	 * @return
+	 */
+	public static <T, K> Map<K, List<T>> group(Collection<T> c, Function<T, K> mapper) {
+		return c.stream().collect(Collectors.groupingBy(mapper));
+	}
+
+	/**
+	 * 使用 {@link Stream} 中每个元素调用指定 {@link Function}，以结果为分组 key 构造 {@link Map} 
+	 * @param <T>
+	 * @param <K>
+	 * @param c
+	 * @param mapper
+	 * @return
+	 */
+	public static <T, K> Map<K, List<T>> map(Stream<T> c, Function<T, K> mapper) {
+		return c.collect(Collectors.groupingBy(mapper));
 	}
 
 }

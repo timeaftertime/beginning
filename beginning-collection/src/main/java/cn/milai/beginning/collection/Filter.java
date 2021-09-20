@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 集合筛选工具类
@@ -26,7 +27,18 @@ public class Filter {
 	 * @return
 	 */
 	public static <T> Set<T> set(Collection<T> c, Predicate<T> p) {
-		return c.stream().filter(p).collect(Collectors.toSet());
+		return set(c.stream(), p);
+	}
+
+	/**
+	 * 返回一个新 {@link Stream}，其元素为 {@code c} 中所有满足条件 {@code p} 的元素
+	 * @param <T>
+	 * @param c
+	 * @param p
+	 * @return
+	 */
+	public static <T> Set<T> set(Stream<T> c, Predicate<T> p) {
+		return c.filter(p).collect(Collectors.toSet());
 	}
 
 	/**
@@ -37,7 +49,18 @@ public class Filter {
 	 * @return
 	 */
 	public static <T> Set<T> nset(Collection<T> c, Predicate<T> p) {
-		return c.stream().filter(p.negate()).collect(Collectors.toSet());
+		return nset(c.stream(), p);
+	}
+
+	/**
+	 * 返回一个新 {@link Stream}，其元素为 {@code c} 中所有不满足条件 {@code p} 的元素
+	 * @param <T>
+	 * @param c
+	 * @param p
+	 * @return
+	 */
+	public static <T> Set<T> nset(Stream<T> c, Predicate<T> p) {
+		return c.filter(p.negate()).collect(Collectors.toSet());
 	}
 
 	/**
@@ -48,7 +71,18 @@ public class Filter {
 	 * @return
 	 */
 	public static <T> List<T> list(Collection<T> c, Predicate<T> p) {
-		return c.stream().filter(p).collect(Collectors.toList());
+		return list(c.stream(), p);
+	}
+
+	/**
+	 * 返回一个新 {@link Stream}，其元素为 {@code c} 中所有满足条件 {@code p} 的元素
+	 * @param <T>
+	 * @param c
+	 * @param p
+	 * @return
+	 */
+	public static <T> List<T> list(Stream<T> c, Predicate<T> p) {
+		return c.filter(p).collect(Collectors.toList());
 	}
 
 	/**
@@ -59,7 +93,18 @@ public class Filter {
 	 * @return
 	 */
 	public static <T> List<T> nlist(Collection<T> c, Predicate<T> p) {
-		return c.stream().filter(p.negate()).collect(Collectors.toList());
+		return nlist(c.stream(), p);
+	}
+
+	/**
+	 * 返回一个新 {@link Stream}，其元素为 {@code c} 中所有不满足条件 {@code p} 的元素
+	 * @param <T>
+	 * @param c
+	 * @param p
+	 * @return
+	 */
+	public static <T> List<T> nlist(Stream<T> c, Predicate<T> p) {
+		return c.filter(p.negate()).collect(Collectors.toList());
 	}
 
 	/**
@@ -103,6 +148,28 @@ public class Filter {
 	 */
 	public static <C extends Collection<T>, T> Optional<T> first(C c, Predicate<T> p) {
 		return c.stream().filter(p).findFirst();
+	}
+
+	/**
+	 * 返回指定 {@link Collection} 所有所有满足指定条件 {@link Predicate} 的 {@link Stream}
+	 * @param <C>
+	 * @param <T>
+	 * @param c
+	 * @param p
+	 */
+	public static <C extends Collection<T>, T> Stream<T> stream(C c, Predicate<T> p) {
+		return c.stream().filter(p);
+	}
+
+	/**
+	 * 返回指定 {@link Collection} 所有所有不满足指定条件 {@link Predicate} 的 {@link Stream}
+	 * @param <C>
+	 * @param <T>
+	 * @param c
+	 * @param p
+	 */
+	public static <C extends Collection<T>, T> Stream<T> nstream(C c, Predicate<T> p) {
+		return stream(c, p.negate());
 	}
 
 }

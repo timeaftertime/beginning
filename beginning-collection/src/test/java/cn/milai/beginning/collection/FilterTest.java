@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -27,6 +28,10 @@ public class FilterTest {
 		assertEquals(TestUtil.newSet(1, 2, 8), s1);
 		assertEquals(TestUtil.newSet(8), Filter.nset(s1, i -> i < 7));
 		assertEquals(TestUtil.newSet(1), Filter.nset(s1, i -> i % 2 == 0));
+
+		assertNotSame(Filter.set(s1.stream(), i -> true), s1);
+		assertEquals(TestUtil.newSet(1), Filter.set(s1.stream(), i -> i < 2));
+		assertEquals(TestUtil.newSet(1), Filter.nset(s1.stream(), i -> i % 2 == 0));
 	}
 
 	@Test
@@ -38,6 +43,9 @@ public class FilterTest {
 		assertEquals(Arrays.asList("888", "aaaa", "测试", "~"), list1);
 		assertEquals(Arrays.asList("aaaa", "~"), Filter.nlist(list1, s -> s.equals("测试") || s.equals("888")));
 		assertEquals(Arrays.asList(), Filter.nlist(list1, s -> true));
+
+		assertEquals(Arrays.asList("aaaa", "~"), Filter.nlist(list1.stream(), s -> s.equals("测试") || s.equals("888")));
+		assertEquals(Arrays.asList(), Filter.nlist(list1.stream(), s -> true));
 	}
 
 	@Test
@@ -85,6 +93,13 @@ public class FilterTest {
 		assertEquals(s3, Filter.first(list, s -> s.equals(s3)).get());
 		assertEquals(s1, Filter.first(list, s -> s.length() > 2).orElse(null));
 		assertEquals(null, Filter.first(list, s -> s == null).orElse(null));
+	}
+
+	@Test
+	public void testStream() {
+		List<Long> list = Arrays.asList(1L, 11L, 22L, 87L);
+		assertEquals(Arrays.asList(22L), Filter.stream(list, n -> n % 2 == 0).collect(Collectors.toList()));
+		assertEquals(Arrays.asList(1L, 11L, 87L), Filter.nstream(list, n -> n % 2 == 0).collect(Collectors.toList()));
 	}
 
 }

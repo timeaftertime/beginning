@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses(
 	value = {
-		FilterTest.class, MergeTest.class, MappingTest.class
+		FilterTest.class, MergeTest.class, MappingTest.class, CreatorTest.class, IntersectionTest.class
 	}
 )
 public class AllTestSuite {

@@ -7,7 +7,8 @@ package cn.milai.common.base;
  */
 public final class Chars {
 
-	private Chars() {}
+	private Chars() {
+	}
 
 	/**
 	 * 小写字母按照（a-z）组成的字符串
@@ -97,6 +98,15 @@ public final class Chars {
 	 */
 	public static boolean isUpper(char c) {
 		return c >= 'A' && c <= 'Z';
+	}
+
+	/**
+	 * 判断指定字符是否为英文字母(A-Z a-z)
+	 * @param c
+	 * @return
+	 */
+	public static boolean isLetter(char c) {
+		return isUpper(c) || isLower(c);
 	}
 
 	/**
