@@ -10,18 +10,12 @@ import cn.milai.beginning.collection.Merge;
 public class Bytes {
 
 	/**
-	 * 将 short 转换为 byte[] 数组
+	 * 将指定 {@code value} 转换为 size 大小的字节数组，超过 {@code size} 字节的高位将被忽略
+	 * @param size
 	 * @param value
 	 * @return
 	 */
-	public static byte[] fromShort(int value) {
-		if (value > Short.MAX_VALUE) {
-			throw new IllegalArgumentException(String.format("参数不能大于 %s: %d", Short.MAX_VALUE, value));
-		}
-		if (value < Short.MIN_VALUE) {
-			throw new IllegalArgumentException(String.format("参数不能小于 %s: %d", Short.MIN_VALUE, value));
-		}
-		int size = 2;
+	private static byte[] intToBytes(int size, int value) {
 		byte[] result = new byte[size];
 		for (int i = 0; i < size; i++) {
 			int shift = i * 8;
@@ -33,32 +27,48 @@ public class Bytes {
 	}
 
 	/**
-	 * 将 int 转换为 byte 数组
+	 * 将 8 位整数转换为字节数组，高位字节将被忽略
+	 * @param value
+	 * @return
+	 */
+	public static byte[] fromInt8(int value) {
+		if (value >= 0) {
+			return intToBytes(1, value);
+		}
+		return intToBytes(1, ((byte) value) & 0xff);
+	}
+
+	/**
+	 * 将 16 位整数转换为字节数组，高位字节将被忽略
+	 * @param value
+	 * @return
+	 */
+	public static byte[] fromInt16(int value) {
+		if (value >= 0) {
+			return intToBytes(2, value);
+		}
+		return intToBytes(2, ((short) value) & 0xffff);
+	}
+
+	/**
+	 * 将 32 位整数转换为 byte 数组
 	 * @param value
 	 * @param size
 	 * @return
 	 */
-	public static byte[] fromInt(int value) {
-		int size = 4;
-		byte[] result = new byte[size];
-		for (int i = 0; i < size; i++) {
-			int shift = i * 8;
-			// 0xffL 即 long 类型的 0xff
-			long mask = 0xffL << shift;
-			result[size - 1 - i] = (byte) ((mask & value) >> shift);
-		}
-		return result;
+	public static byte[] fromInt32(int value) {
+		return intToBytes(4, value);
 	}
 
 	/**
-	 * 将 long 转换为大小为 16 的字节数组
+	 * 将 64 位整数字节数组
 	 * @param value
 	 * @return
 	 */
-	public static byte[] fromLong(long value) {
+	public static byte[] fromInt64(long value) {
 		int highBits = (int) ((0xffffffff00000000L & value) >> 32);
 		int lowBits = (int) (0x00000000ffffffffffffL & value);
-		return Merge.array(fromInt(highBits), fromInt(lowBits));
+		return Merge.array(fromInt32(highBits), fromInt32(lowBits));
 	}
 
 	/**
@@ -71,7 +81,6 @@ public class Bytes {
 		int utflen = 0;
 		int c, count = 0;
 
-		/* use charAt instead of copying String to char array */
 		for (int i = 0; i < strlen; i++) {
 			c = str.charAt(i);
 			if ((c >= 0x0001) && (c <= 0x007F)) {
@@ -107,12 +116,12 @@ public class Bytes {
 	}
 
 	/**
-	 * float 转换为字节数组
+	 * 将 32 位浮点数转换为字节数组
 	 * @param value
 	 * @return
 	 */
 	public static byte[] fromFloat(float value) {
-		return fromInt(Float.floatToIntBits(value));
+		return fromInt32(Float.floatToIntBits(value));
 	}
 
 }

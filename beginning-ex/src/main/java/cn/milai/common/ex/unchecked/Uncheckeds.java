@@ -1,8 +1,9 @@
 package cn.milai.common.ex.unchecked;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cn.milai.common.ex.Exceptions;
 
 /**
  * 转换受检异常的工具类
@@ -15,7 +16,8 @@ public class Uncheckeds {
 
 	private static final String DEF_ERR_MSG = "发生异常";
 
-	private Uncheckeds() {}
+	private Uncheckeds() {
+	}
 
 	/**
 	 * 执行指定代码块
@@ -86,7 +88,7 @@ public class Uncheckeds {
 		try {
 			t.run();
 		} catch (Exception e) {
-			log.error("{}, err = {}", buildErrMsg(errMsg, args), ExceptionUtils.getStackTrace(e));
+			log.error("{}, err = {}", buildErrMsg(errMsg, args), Exceptions.getStackTrace(e));
 		}
 	}
 
@@ -103,7 +105,7 @@ public class Uncheckeds {
 		try {
 			return t.call();
 		} catch (Exception e) {
-			log.error("{}, err = {}", buildErrMsg(errMsg, args), ExceptionUtils.getStackTrace(e));
+			log.error("{}, err = {}", buildErrMsg(errMsg, args), Exceptions.getStackTrace(e));
 			return null;
 		}
 	}
@@ -140,7 +142,7 @@ public class Uncheckeds {
 			t.run();
 		} catch (Exception e) {
 			RethrownException rethrow = newRethrowException(e, format, args);
-			LOG.error("{}", ExceptionUtils.getStackTrace(rethrow));
+			LOG.error("{}", Exceptions.getStackTrace(rethrow));
 			throw rethrow;
 		}
 	}
@@ -159,7 +161,7 @@ public class Uncheckeds {
 			return t.call();
 		} catch (Exception e) {
 			RethrownException rethrow = newRethrowException(e, format, args);
-			LOG.error("{}", ExceptionUtils.getStackTrace(rethrow));
+			LOG.error("{}", Exceptions.getStackTrace(rethrow));
 			throw rethrow;
 		}
 	}

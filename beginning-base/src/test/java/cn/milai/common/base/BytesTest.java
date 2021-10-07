@@ -1,13 +1,15 @@
 package cn.milai.common.base;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -19,42 +21,39 @@ public class BytesTest {
 
 	@Test
 	public void testFromShort() throws IOException {
-		for (int value : new int[] { 123, 89, -12, 0, 222, Short.MAX_VALUE, Short.MIN_VALUE }) {
-			assertArrayEquals(getShortBytes(value), Bytes.fromShort(value));
+		for (int value : new int[] {
+			123, 89, 0, 222,
+			Short.MAX_VALUE,
+			Short.MAX_VALUE + 1,
+			Short.MAX_VALUE + 2,
+		}) {
+			assertArrayEquals(getPostiveShortBytes(value), Bytes.fromInt16(value));
 		}
-		try {
-			Bytes.fromShort(Short.MAX_VALUE + 1);
-		} catch (IllegalArgumentException e1) {
-			try {
-				Bytes.fromShort(Short.MIN_VALUE - 1);
-			} catch (IllegalArgumentException e2) {
-				return;
-			}
-			return;
+		for (int value : new int[] { -12, Short.MIN_VALUE, -128, -2021 }) {
+			assertEquals(value, dataInput(Bytes.fromInt16(value)).readShort());
 		}
-		Assert.fail();
 	}
 
 	@Test
 	public void testFromInt() throws IOException {
 		int value = 123;
-		assertArrayEquals(getBytes(value), Bytes.fromInt(value));
+		assertArrayEquals(getBytes(value), Bytes.fromInt32(value));
 		value = -128;
-		assertArrayEquals(getBytes(value), Bytes.fromInt(value));
+		assertArrayEquals(getBytes(value), Bytes.fromInt32(value));
 		value = 0;
-		assertArrayEquals(getBytes(value), Bytes.fromInt(value));
+		assertArrayEquals(getBytes(value), Bytes.fromInt32(value));
 		value = 11223344;
-		assertArrayEquals(getBytes(value), Bytes.fromInt(value));
+		assertArrayEquals(getBytes(value), Bytes.fromInt32(value));
 	}
 
 	@Test
 	public void testFromLong() throws IOException {
 		long value = 999888777012L;
-		assertArrayEquals(getBytes(value), Bytes.fromLong(value));
+		assertArrayEquals(getBytes(value), Bytes.fromInt64(value));
 		value = 0L;
-		assertArrayEquals(getBytes(value), Bytes.fromLong(value));
+		assertArrayEquals(getBytes(value), Bytes.fromInt64(value));
 		value = -12345987600L;
-		assertArrayEquals(getBytes(value), Bytes.fromLong(value));
+		assertArrayEquals(getBytes(value), Bytes.fromInt64(value));
 	}
 
 	@Test
@@ -103,11 +102,15 @@ public class BytesTest {
 		return out.toByteArray();
 	}
 
-	public static byte[] getShortBytes(int value) throws IOException {
+	public static byte[] getPostiveShortBytes(int value) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		DataOutputStream writer = new DataOutputStream(out);
 		writer.writeShort(value);
 		return out.toByteArray();
+	}
+
+	private static DataInputStream dataInput(byte[] bytes) {
+		return new DataInputStream(new ByteArrayInputStream(bytes));
 	}
 
 	public static byte[] getBytes(float value) throws IOException {
