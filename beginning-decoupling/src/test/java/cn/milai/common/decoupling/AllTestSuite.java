@@ -9,7 +9,7 @@ import cn.milai.common.decoupling.map.MappersTest;
 @RunWith(Suite.class)
 @SuiteClasses(
 	value = {
-		MappersTest.class
+		MappersTest.class, RespTest.class
 	}
 )
 public class AllTestSuite {

@@ -11,12 +11,12 @@ public class Resp<T> {
 	/**
 	 * 成功的状态码
 	 */
-	static String SUCCESS = "SUCCESS";
+	public static int SUCCESS = 0;
 
 	/**
 	 * 唯一标识
 	 */
-	private String code;
+	private int code;
 
 	/**
 	 * 详细信息
@@ -32,12 +32,13 @@ public class Resp<T> {
 	 * 判断当前状态是否为成功
 	 * @return
 	 */
-	public boolean isSuccess() { return code != null && SUCCESS.equals(code); }
+	public boolean isSuccess() { return SUCCESS == code; }
 
 	/**
 	 * 构造一个所有字段为默认值的响应
 	 */
-	public Resp() {}
+	public Resp() {
+	}
 
 	/**
 	 * 构造一个指定状态、描述和数据的响应
@@ -46,7 +47,7 @@ public class Resp<T> {
 	 * @param data
 	 * @param 用于 format desc 中的参数
 	 */
-	public Resp(String code, String desc, T data, String... descArgs) {
+	public Resp(int code, String desc, T data, String... descArgs) {
 		this.code = code;
 		this.desc = String.format(desc, (Object) descArgs);
 		this.data = data;
@@ -59,7 +60,7 @@ public class Resp<T> {
 	 * @param descArgs
 	 * @return
 	 */
-	public static <T> Resp<T> fail(String code, String desc, String... descArgs) {
+	public static <T> Resp<T> fail(int code, String desc, String... descArgs) {
 		return new Resp<>(code, desc, null, descArgs);
 	}
 
@@ -107,7 +108,7 @@ public class Resp<T> {
 	 * 获取响应唯一标识
 	 * @return
 	 */
-	public String getCode() { return code; }
+	public int getCode() { return code; }
 
 	/**
 	 * 获取响应描述
@@ -121,7 +122,7 @@ public class Resp<T> {
 	 */
 	public T getData() { return data; }
 
-	public void setCode(String code) { this.code = code; }
+	public void setCode(int code) { this.code = code; }
 
 	public void setDesc(String desc) { this.desc = desc; }
 

@@ -11,7 +11,7 @@ public interface RespCode {
 	 * 获取唯一标识码
 	 * @return
 	 */
-	String getCode();
+	int getCode();
 
 	/**
 	 * 获取描述
