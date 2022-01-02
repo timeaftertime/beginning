@@ -11,27 +11,41 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class Digests {
 
-	private Digests() {}
+	private Digests() {
+	}
 
 	public static final Charset UTF_8 = Charset.forName("UTF-8");
 
 	private static final MessageDigest SHA256;
 
+	private static final MessageDigest MD5;
+
 	static {
 		try {
 			SHA256 = MessageDigest.getInstance("SHA-256");
+			MD5 = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
 			throw new IllegalArgumentException(e);
 		}
 	}
 
 	/**
-	 * 获取 sha-256 散列后的 16 进制字符串(长度为64)
+	 * 获取 sha-256 散列后的 16 进制字符串(长度为 64)
 	 * @param str
 	 * @return
 	 */
 	public static synchronized String sha256(String str) {
 		byte[] digest = SHA256.digest(str.getBytes(UTF_8));
+		return to16Str(digest);
+	}
+
+	/**
+	 * 获取 md5 散列后的 16 进制字符串(长度为 32)
+	 * @param str
+	 * @return
+	 */
+	public static synchronized String md5(String str) {
+		byte[] digest = MD5.digest(str.getBytes(UTF_8));
 		return to16Str(digest);
 	}
 

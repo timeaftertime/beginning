@@ -6,37 +6,26 @@
 		<artifactId>beginning-parent</artifactId>
 		<version>0.0.5-SNAPSHOT</version>
 	</parent>
-	<artifactId>beginning-all</artifactId>
-	<description>集成所有 beginning 模块</description>
+	<artifactId>beginning-api</artifactId>
+	<name>beginning-api</name>
+	<description>实现接口的相关代码</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>cn.milai.beginning</groupId>
-			<artifactId>beginning-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>cn.milai.beginning</groupId>
-			<artifactId>beginning-ex</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>cn.milai.beginning</groupId>
-			<artifactId>beginning-io</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>cn.milai.beginning</groupId>
 			<artifactId>beginning-base</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>cn.milai.beginning</groupId>
-			<artifactId>beginning-collection</artifactId>
+			<artifactId>beginning-ex</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>cn.milai.beginning</groupId>
-			<artifactId>beginning-http</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>cn.milai.beginning</groupId>
-			<artifactId>beginning-thread</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

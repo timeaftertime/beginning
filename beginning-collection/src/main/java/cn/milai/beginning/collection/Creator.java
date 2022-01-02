@@ -3,8 +3,10 @@ package cn.milai.beginning.collection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -70,4 +72,19 @@ public class Creator {
 		iter.forEach(e -> set.add(e));
 		return set;
 	}
+
+	/**
+	 * 使用指定 k, v 创建一个 {@link HashMap}
+	 * @param <K>
+	 * @param <V>
+	 * @param k
+	 * @param v
+	 * @return
+	 */
+	public static <K, V> Map<K, V> hashMap(K k, V v) {
+		Map<K, V> m = new HashMap<>();
+		m.put(k, v);
+		return m;
+	}
+
 }

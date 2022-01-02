@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+/**
+ * {@link Digests} 测试类
+ * @author milai
+ * @date 2021.12.05
+ */
 public class DigestsTest {
 
 	@Test
@@ -15,6 +20,13 @@ public class DigestsTest {
 				"DigestUtil"
 			)
 		);
+	}
+
+	@Test
+	public void testMd5() {
+		assertEquals("E3587F6620B552E78446D548A28392D9", Digests.md5("beginning"));
+		assertEquals("339DD0A541AA237B428EC3EE0B65CDBD", Digests.md5("digest-!!!"));
+		assertEquals("37C48F0C947DDD06D5AD04F3AB580366", Digests.md5("某段待md5的中文"));
 	}
 
 }

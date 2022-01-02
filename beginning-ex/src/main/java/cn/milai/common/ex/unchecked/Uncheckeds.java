@@ -14,8 +14,6 @@ public class Uncheckeds {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Uncheckeds.class);
 
-	private static final String DEF_ERR_MSG = "发生异常";
-
 	private Uncheckeds() {
 	}
 
@@ -88,7 +86,7 @@ public class Uncheckeds {
 		try {
 			t.run();
 		} catch (Exception e) {
-			log.error("{}, err = {}", buildErrMsg(errMsg, args), Exceptions.getStackTrace(e));
+			log.error("{}, err = {}", buildErrMsg(e, errMsg, args), Exceptions.getStackTrace(e));
 		}
 	}
 
@@ -105,7 +103,7 @@ public class Uncheckeds {
 		try {
 			return t.call();
 		} catch (Exception e) {
-			log.error("{}, err = {}", buildErrMsg(errMsg, args), Exceptions.getStackTrace(e));
+			log.error("{}, err = {}", buildErrMsg(e, errMsg, args), Exceptions.getStackTrace(e));
 			return null;
 		}
 	}
@@ -189,11 +187,11 @@ public class Uncheckeds {
 	}
 
 	private static RethrownException newRethrowException(Throwable e, String format, Object... args) {
-		return RethrownException.wrap(e, buildErrMsg(format, args));
+		return RethrownException.wrap(e, buildErrMsg(e, format, args));
 	}
 
-	private static String buildErrMsg(String format, Object... args) {
-		return format.isEmpty() ? DEF_ERR_MSG : String.format(format, args);
+	private static String buildErrMsg(Throwable e, String format, Object... args) {
+		return format.isEmpty() ? e.toString() : String.format(format, args);
 	}
 
 }

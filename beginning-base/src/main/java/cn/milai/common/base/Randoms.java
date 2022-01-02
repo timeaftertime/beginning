@@ -24,7 +24,8 @@ public final class Randoms {
 		}
 	}
 
-	private Randoms() {}
+	private Randoms() {
+	}
 
 	/**
 	 * 获取从 alphabet 中随机挑选 length 个字符组成的字符串
@@ -32,7 +33,7 @@ public final class Randoms {
 	 * @param length
 	 * @return
 	 */
-	private static String randStr(char[] alphabet, int length) {
+	public static String randStr(char[] alphabet, int length) {
 		if (length < 0) {
 			throw new IllegalArgumentException("长度必须大于等于 0");
 		}
@@ -55,7 +56,7 @@ public final class Randoms {
 	 * @param length
 	 * @return
 	 */
-	private static String randStr(String alphabet, int length) {
+	public static String randStr(String alphabet, int length) {
 		return randStr(alphabet.toCharArray(), length);
 	}
 

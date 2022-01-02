@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Test;
@@ -41,5 +42,10 @@ public class CreatorTest {
 		list.add(1);
 		assertEquals(Arrays.asList(1, 2, 3, 1), list);
 		assertEquals(Creator.arrayList("a", "1"), Creator.arrayList(Arrays.asList("a", "1")));
+
+		String key = "abc";
+		Map<String, List<Integer>> map = Creator.hashMap(key, Creator.arrayList(1, 2, 3));
+		assertEquals(1, map.size());
+		assertEquals(Arrays.asList(1, 2, 3), map.get(key));
 	}
 }

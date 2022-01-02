@@ -8,7 +8,7 @@
 	<name>beginning</name>
 	<description>常用公共代码库</description>
 	<modules>
-		<module>beginning-decoupling</module>
+		<module>beginning-api</module>
 		<module>beginning-base</module>
 		<module>beginning-io</module>
 		<module>beginning-ex</module>
@@ -69,7 +69,7 @@
 		<dependencies>
 			<dependency>
 				<groupId>cn.milai.beginning</groupId>
-				<artifactId>beginning-decoupling</artifactId>
+				<artifactId>beginning-api</artifactId>
 				<version>${beginning.version}</version>
 			</dependency>
 			<dependency>
@@ -129,9 +129,9 @@
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>fastjson</artifactId>
-				<version>1.2.75</version>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>2.13.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
