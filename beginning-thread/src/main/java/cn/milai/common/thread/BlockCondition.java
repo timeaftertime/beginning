@@ -3,6 +3,7 @@ package cn.milai.common.thread;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -19,19 +20,28 @@ public class BlockCondition implements Condition {
 
 	/**
 	 * 创建一个通过指定回调方法判断 {@link #isMet()} 和实现 {@link #toMet()} 的 {@link BlockCondition}
-	 * @param met
-	 * @param toMet
+	 * @param met 判断当前是否已经满足条件的 {@link Supplier}
+	 * @param toMet 设置当前状态为满足条件的 {@link Consumer}
 	 */
 	public BlockCondition(Supplier<Boolean> met, Consumer<Condition> toMet) {
 		this.met = met;
 		this.toMet = toMet;
 	}
 
+	/**
+	 * 构造一个简单通过 bool 设置作为判断条件的 {@link BlockCondition}
+	 * @return
+	 */
+	public static BlockCondition newSimple() {
+		AtomicBoolean met = new AtomicBoolean();
+		return new BlockCondition(met::get, m -> met.compareAndSet(false, true));
+	}
+
 	@Override
 	public final boolean isMet() { return met.get(); }
 
 	/**
-	 * 等待到当前 {@link #isMet()} 返回 {@code true} 后从当前方法返回，返回时线程中断状态将被清除
+	 * 等待 {@link #toMet()} 被调用后从当前方法返回，返回时线程中断状态将被清除
 	 */
 	@Override
 	public void await() {

@@ -9,15 +9,27 @@ import org.springframework.beans.BeanUtils;
  */
 public abstract class AbstractMapper<S, T> implements Mapper<S, T> {
 
+	private Class<S> sourceClass;
 	private Class<T> targetClass;
 
 	public AbstractMapper(Class<S> sourceClass, Class<T> targetClass) {
+		this.sourceClass = sourceClass;
 		this.targetClass = targetClass;
 	}
 
 	@Override
-	public T map(S source, String... ignores) {
-		return map(source, BeanUtils.instantiateClass(targetClass), ignores);
+	public final T map(S source) {
+		return map(source, BeanUtils.instantiateClass(targetClass));
+	}
+
+	@Override
+	public Class<S> sourceClass() {
+		return sourceClass;
+	}
+
+	@Override
+	public Class<T> targetClass() {
+		return targetClass;
 	}
 
 }

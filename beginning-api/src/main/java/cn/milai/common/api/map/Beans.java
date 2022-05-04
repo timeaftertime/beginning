@@ -13,7 +13,6 @@ import org.springframework.core.ResolvableType;
 import org.springframework.util.ClassUtils;
 
 import cn.milai.common.base.Classes;
-import cn.milai.common.ex.unchecked.Uncheckeds;
 
 /**
  * Bean 工具类
@@ -97,46 +96,72 @@ public class Beans {
 			return null;
 		}
 		for (PropertyDescriptor targetPd : BeanUtils.getPropertyDescriptors(target.getClass())) {
+			if (ignores != null && ignores.contains(targetPd.getName())) {
+				continue;
+			}
 			Method writeMethod = targetPd.getWriteMethod();
 			if (writeMethod == null) {
 				continue;
 			}
-			if (ignores != null && ignores.contains(targetPd.getName())) {
-				continue;
-			}
-			PropertyDescriptor sourcePd = BeanUtils.getPropertyDescriptor(source.getClass(), targetPd.getName());
-			if (sourcePd == null) {
-				continue;
-			}
-			Method readMethod = sourcePd.getReadMethod();
-			if (readMethod == null) {
-				continue;
-			}
-			ResolvableType sourceResolvableType = ResolvableType.forMethodReturnType(readMethod);
-			ResolvableType targetResolvableType = ResolvableType.forMethodParameter(writeMethod, 0);
-			boolean isAssignable = (sourceResolvableType.hasUnresolvableGenerics() || targetResolvableType
-				.hasUnresolvableGenerics() ? ClassUtils.isAssignable(
-					writeMethod.getParameterTypes()[0], readMethod.getReturnType()
-				) : targetResolvableType.isAssignableFrom(sourceResolvableType));
-
-			if (!isAssignable) {
-				continue;
-			}
-			Uncheckeds.rethrow(() -> {
-				if (!Modifier.isPublic(readMethod.getDeclaringClass().getModifiers())) {
-					readMethod.setAccessible(true);
-				}
-				Object value = readMethod.invoke(source);
-				if (deep && !Classes.isSingle(value.getClass())) {
-					value = copySelf(value);
-				}
-				if (!Modifier.isPublic(writeMethod.getDeclaringClass().getModifiers())) {
-					writeMethod.setAccessible(true);
-				}
-				writeMethod.invoke(target, value);
-			});
+			copyField(source, target, targetPd.getName(), deep);
 		}
 		return target;
+	}
+
+	/**
+	 * 从 source 复制指定字段到 target，返回是否复制成功
+	 * @param <S>
+	 * @param <T>
+	 * @param source
+	 * @param target
+	 * @param field
+	 * @param deep
+	 * @return
+	 */
+	public static <S, T> boolean copyField(S source, T target, String field, boolean deep) {
+		PropertyDescriptor targetPd = BeanUtils.getPropertyDescriptor(target.getClass(), field);
+		Method writeMethod = targetPd.getWriteMethod();
+		if (writeMethod == null) {
+			return false;
+		}
+		PropertyDescriptor sourcePd = BeanUtils.getPropertyDescriptor(source.getClass(), targetPd.getName());
+		if (sourcePd == null) {
+			return false;
+		}
+		Method readMethod = sourcePd.getReadMethod();
+		if (readMethod == null) {
+			return false;
+		}
+		ResolvableType sourceResolvableType = ResolvableType.forMethodReturnType(readMethod);
+		ResolvableType targetResolvableType = ResolvableType.forMethodParameter(writeMethod, 0);
+		boolean isAssignable = (sourceResolvableType.hasUnresolvableGenerics() || targetResolvableType
+			.hasUnresolvableGenerics() ? ClassUtils.isAssignable(
+				writeMethod.getParameterTypes()[0], readMethod.getReturnType()
+			) : targetResolvableType.isAssignableFrom(sourceResolvableType));
+
+		if (!isAssignable) {
+			return false;
+		}
+		try {
+			if (!Modifier.isPublic(readMethod.getDeclaringClass().getModifiers())) {
+				readMethod.setAccessible(true);
+			}
+			Object value = readMethod.invoke(source);
+			if (deep && !Classes.isSingle(value.getClass())) {
+				value = copySelf(value);
+			}
+			if (!Modifier.isPublic(writeMethod.getDeclaringClass().getModifiers())) {
+				writeMethod.setAccessible(true);
+			}
+			writeMethod.invoke(target, value);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	public static <S, T> void copyField(S source, T target, String field) {
+		copyField(source, target, field, false);
 	}
 
 	@SuppressWarnings("unchecked")

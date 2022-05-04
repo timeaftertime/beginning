@@ -29,8 +29,9 @@ public class MapperBuilder<S, T> {
 	public MapperBuilder<S, T> then(IMapper<S, T> mapper) {
 		return new MapperBuilder<>(this, new AbstractMapper<S, T>(sourceClass, targetClass) {
 			@Override
-			public T map(S source, T target, String... ignores) {
-				return mapper.map(source, target, ignores);
+			public T map(S source, T target) {
+				mapper.map(source, target);
+				return target;
 			}
 		});
 	}
@@ -68,9 +69,9 @@ public class MapperBuilder<S, T> {
 	public Mapper<S, T> build() {
 		return new AbstractMapper<S, T>(sourceClass, targetClass) {
 			@Override
-			public T map(S source, T target, String... ignores) {
+			public T map(S source, T target) {
 				for (Mapper<S, T> mapper : mappers) {
-					target = mapper.map(source, target, ignores);
+					target = mapper.map(source, target);
 				}
 				return target;
 			}

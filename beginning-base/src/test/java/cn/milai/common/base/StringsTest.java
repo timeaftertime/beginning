@@ -39,4 +39,11 @@ public class StringsTest {
 	public void testToLines() {
 		assertEquals(Arrays.asList("abc", "123", "中文"), Strings.toLines("abc\n123\n中文"));
 	}
+
+	@Test
+	public void testFormat() {
+		assertEquals("[123]", Strings.format("[%d]", 123));
+		assertEquals("[%d]", Strings.format("[%d]", "123"));
+		assertEquals("[%d]", Strings.format("[%d]"));
+	}
 }

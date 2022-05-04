@@ -12,8 +12,13 @@ public class RespFailedException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public RespFailedException(String msg) {
+	private Resp<Void> resp;
+
+	@SuppressWarnings("unchecked")
+	public RespFailedException(Resp<?> resp, String msg) {
 		super(msg);
+		this.resp = (Resp<Void>) resp;
 	}
 
+	public Resp<Void> getResp() { return resp; }
 }

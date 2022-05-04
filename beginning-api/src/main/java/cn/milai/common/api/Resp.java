@@ -1,5 +1,9 @@
 package cn.milai.common.api;
 
+import java.util.function.Function;
+
+import cn.milai.common.base.Strings;
+
 /**
  * 接口统一返回模型
  * @date 2020.01.27
@@ -12,6 +16,11 @@ public class Resp<T> {
 	 * 成功的状态码
 	 */
 	public static int SUCCESS = 0;
+
+	/**
+	 * 未知错误状态码
+	 */
+	public static int UNKOWN_ERROR = -1;
 
 	/**
 	 * 唯一标识
@@ -47,30 +56,31 @@ public class Resp<T> {
 	 * @param data
 	 * @param 用于 format desc 中的参数
 	 */
-	public Resp(int code, String desc, T data, String... descArgs) {
+	public Resp(int code, String desc, T data, Object... descArgs) {
 		this.code = code;
-		this.desc = String.format(desc, (Object) descArgs);
+		this.desc = Strings.format(desc, descArgs);
 		this.data = data;
 	}
 
 	/**
 	 * 若 {@link #isSuccess()} 返回 <code>true</code>，返回当前 {@link Resp}；
-	 * 否则抛出指定错误信息的 {@link RespFailedException}
-	 * @param msg
-	 * @param args
+	 * 否则抛出 {@link RespFailedException}
+	 * @param msg 要覆盖的 msg
+	 * @param msg format 参数
 	 * @return
 	 * @throws RespFailedException
 	 */
 	public Resp<T> throwOrGet(String msg, Object... args) throws RespFailedException {
 		if (!isSuccess()) {
-			throw new RespFailedException(String.format(msg, args));
+			throw new RespFailedException(this, Strings.format(msg, args));
 		}
 		return this;
 	}
 
 	/**
 	 * 若 {@link #isSuccess()} 返回 <code>true</code>，返回当前 {@link Resp}；
-	 * 否则抛出空错误信息的 {@link RespFailedException}
+	 * 否则抛出 {@link RespFailedException}
+	 * @param msg
 	 * @return
 	 * @throws RespFailedException
 	 */
@@ -85,8 +95,19 @@ public class Resp<T> {
 	 * @param descArgs
 	 * @return
 	 */
-	public static <T> Resp<T> fail(int code, String desc, String... descArgs) {
+	public static <T> Resp<T> fail(int code, String desc, Object... descArgs) {
 		return new Resp<>(code, desc, null, descArgs);
+	}
+
+	/**
+	 * 返回一个未知
+	 * @param <T>
+	 * @param desc
+	 * @param descArgs
+	 * @return
+	 */
+	public static <T> Resp<T> fail(String desc, Object... descArgs) {
+		return fail(UNKOWN_ERROR, desc, descArgs);
 	}
 
 	/**
@@ -100,14 +121,23 @@ public class Resp<T> {
 	}
 
 	/**
+	 * 返回一个未知异常响应
+	 * @param <T>
+	 * @return
+	 */
+	public static <T> Resp<T> fail() {
+		return Resp.fail(UNKOWN_ERROR, "");
+	}
+
+	/**
 	 * 返回一个指定 code 和描述参数请求失败响应
 	 * @param <T>
 	 * @param code
 	 * @param descArgs
 	 * @return
 	 */
-	public static <T> Resp<T> fail(RespCode code, String... descArgs) {
-		return new Resp<>(code.getCode(), String.format(code.getDesc(), (Object[]) descArgs), null);
+	public static <T> Resp<T> fail(RespCode code, Object... descArgs) {
+		return new Resp<>(code.getCode(), Strings.format(code.getDesc(), (Object[]) descArgs), null);
 	}
 
 	/**
@@ -127,6 +157,29 @@ public class Resp<T> {
 	 */
 	public static <T> Resp<T> success() {
 		return Resp.success(null);
+	}
+
+	/**
+	 * 复制指定 {@link Resp}，返回复制的新 {@link Resp}
+	 * @param <I>
+	 * @param <O>
+	 * @param r
+	 * @param mapper
+	 * @return
+	 */
+	public static <I, O> Resp<O> of(Resp<I> r, Function<I, O> mapper) {
+		O data = r.data == null ? null : mapper.apply(r.data);
+		return new Resp<>(r.code, r.desc, data);
+	}
+
+	/**
+	 * 复制指定 {@link Resp}，返回复制的 data 为 <code>null</code> 的 {@link Resp}
+	 * @param <I>
+	 * @param r
+	 * @return
+	 */
+	public static <I> Resp<Void> of(Resp<I> r) {
+		return new Resp<>(r.code, r.desc, null);
 	}
 
 	/**

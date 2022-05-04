@@ -10,7 +10,8 @@ import java.util.List;
  */
 public final class Strings {
 
-	private Strings() {}
+	private Strings() {
+	}
 
 	/**
 	 * 获取字符串的切片
@@ -80,6 +81,20 @@ public final class Strings {
 			strs.add(line);
 		}
 		return strs;
+	}
+
+	/**
+	 * 获取 format 使用指定参数格式化后的结果，若格式化失败，返回 format
+	 * @param format
+	 * @param args
+	 * @return
+	 */
+	public static String format(String format, Object... args) {
+		try {
+			return String.format(format, args);
+		} catch (Exception e) {
+			return format;
+		}
 	}
 
 }

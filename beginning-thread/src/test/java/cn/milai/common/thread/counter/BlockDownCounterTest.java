@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class BlockDownCounterTest {
 
-	@Test(timeout = 1000)
+	@Test(timeout = 50)
 	public void testAwait() throws InterruptedException {
 		AtomicBoolean ok = new AtomicBoolean();
 		Counter c1 = new BlockDownCounter(1);
