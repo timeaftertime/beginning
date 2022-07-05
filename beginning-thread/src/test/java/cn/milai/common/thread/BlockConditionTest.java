@@ -14,11 +14,11 @@ import org.junit.Test;
  */
 public class BlockConditionTest {
 
-	@Test(timeout = 1000)
+	@Test(timeout = 150)
 	public void testBlock() {
-		Thread mainThread = Thread.currentThread();
 		AtomicBoolean p1 = new AtomicBoolean();
 		AtomicBoolean p2 = new AtomicBoolean();
+		Thread mainThread = Thread.currentThread();
 		BlockCondition c1 = new BlockCondition(() -> p1.get(), null);
 		BlockCondition c2 = new BlockCondition(() -> p2.get(), null);
 		Thread childThread = new Thread(() -> {

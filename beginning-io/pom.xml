@@ -7,7 +7,7 @@
 		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>beginning-io</artifactId>
-	<description>IO 相关公共代码</description>
+	<description>I/O utilities</description>
 
 	<dependencies>
 		<dependency>
@@ -16,7 +16,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.milai.beginning</groupId>
-			<artifactId>beginning-base</artifactId>
+			<artifactId>beginning-util</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

@@ -7,7 +7,7 @@
 		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>beginning-thread</artifactId>
-	<description>线程相关公共代码</description>
+	<description>Thread and concurrence utilities</description>
 
 	<dependencies>
 		<dependency>

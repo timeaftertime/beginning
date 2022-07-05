@@ -6,13 +6,26 @@
 		<artifactId>beginning-parent</artifactId>
 		<version>0.0.5-SNAPSHOT</version>
 	</parent>
-	<artifactId>beginning-ex</artifactId>
-	<description>Exception Utilities</description>
+	<artifactId>beginning-uniform</artifactId>
+	<name>beginning-uniform</name>
+	<description>Uniform view utilities</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
+			<groupId>cn.milai.beginning</groupId>
+			<artifactId>beginning-util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.milai.beginning</groupId>
+			<artifactId>beginning-ex</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
