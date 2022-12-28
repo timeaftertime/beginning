@@ -7,6 +7,17 @@ package cn.milai.common.uniform.mapper;
  */
 public interface Mapper<S, T> {
 
+	static <S, T> String keyOf(Class<S> s, Class<T> t) {
+		return s.getName() + "_" + t.getName();
+	}
+
+	/**
+	 * 注册一个子 {@link Mapper}
+	 * @param mapper
+	 * @return
+	 */
+	Mapper<S, T> use(Mapper<?, ?> mapper);
+
 	/**
 	 * 获取 source 类型
 	 * @return

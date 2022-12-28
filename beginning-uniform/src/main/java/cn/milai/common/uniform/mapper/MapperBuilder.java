@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.milai.common.collection.Merge;
-import cn.milai.common.uniform.mapper.Mappers.IMapper;
 
 /**
  * {@link Mapper} 构造器，用于构造多个 {@link Mapper} 顺序转换模型的 {@link Mapper}
@@ -26,8 +25,8 @@ public class MapperBuilder<S, T> {
 	 * @param mapper
 	 * @return
 	 */
-	public MapperBuilder<S, T> then(IMapper<S, T> mapper) {
-		return new MapperBuilder<>(this, new AbstractMapper<S, T>(sourceClass, targetClass) {
+	public MapperBuilder<S, T> then(MapOP<S, T> mapper) {
+		return new MapperBuilder<>(this, new BaseMapper<S, T>(sourceClass, targetClass) {
 			@Override
 			public T map(S source, T target) {
 				mapper.map(source, target);
@@ -67,7 +66,7 @@ public class MapperBuilder<S, T> {
 	 * @return
 	 */
 	public Mapper<S, T> build() {
-		return new AbstractMapper<S, T>(sourceClass, targetClass) {
+		return new BaseMapper<S, T>(sourceClass, targetClass) {
 			@Override
 			public T map(S source, T target) {
 				for (Mapper<S, T> mapper : mappers) {

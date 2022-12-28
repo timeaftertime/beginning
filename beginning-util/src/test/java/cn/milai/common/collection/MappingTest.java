@@ -70,7 +70,7 @@ public class MappingTest {
 		assertEquals(map.get(5), Arrays.asList(marks, nums));
 		assertEquals(map.get(6), Arrays.asList(subs));
 		assertEquals(map.get(8), Arrays.asList(letters));
-		assertEquals(map, Mapping.group(list, s -> s.length()));
+		assertEquals(map, Mapping.map(list, s -> s.length()));
 	}
 
 	private Character[] toCharacters(String s) {

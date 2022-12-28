@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.ResolvableType;
@@ -103,7 +104,7 @@ public class Beans {
 			if (writeMethod == null) {
 				continue;
 			}
-			copyField(source, target, targetPd.getName(), deep);
+			copyField(source, target, targetPd.getName(), deep ? o -> deepCopy(o) : null);
 		}
 		return target;
 	}
@@ -118,7 +119,7 @@ public class Beans {
 	 * @param deep
 	 * @return
 	 */
-	public static <S, T> boolean copyField(S source, T target, String field, boolean deep) {
+	public static <S, T> boolean copyField(S source, T target, String field, Function<Object, Object> mapper) {
 		PropertyDescriptor targetPd = BeanUtils.getPropertyDescriptor(target.getClass(), field);
 		Method writeMethod = targetPd.getWriteMethod();
 		if (writeMethod == null) {
@@ -132,23 +133,24 @@ public class Beans {
 		if (readMethod == null) {
 			return false;
 		}
-		ResolvableType sourceResolvableType = ResolvableType.forMethodReturnType(readMethod);
-		ResolvableType targetResolvableType = ResolvableType.forMethodParameter(writeMethod, 0);
-		boolean isAssignable = (sourceResolvableType.hasUnresolvableGenerics() || targetResolvableType
-			.hasUnresolvableGenerics() ? ClassUtils.isAssignable(
-				writeMethod.getParameterTypes()[0], readMethod.getReturnType()
-			) : targetResolvableType.isAssignableFrom(sourceResolvableType));
 
-		if (!isAssignable) {
-			return false;
-		}
 		try {
 			if (!Modifier.isPublic(readMethod.getDeclaringClass().getModifiers())) {
 				readMethod.setAccessible(true);
 			}
 			Object value = readMethod.invoke(source);
-			if (deep && !Classes.isSingle(value.getClass())) {
-				value = copySelf(value);
+			if (mapper != null) {
+				value = mapper.apply(value);
+			}
+			ResolvableType sourceResolvableType = ResolvableType.forInstance(value);
+			ResolvableType targetResolvableType = ResolvableType.forMethodParameter(writeMethod, 0);
+			boolean isAssignable = (sourceResolvableType.hasUnresolvableGenerics() || targetResolvableType
+				.hasUnresolvableGenerics() ? ClassUtils.isAssignable(
+					writeMethod.getParameterTypes()[0], value.getClass()
+				) : targetResolvableType.isAssignableFrom(sourceResolvableType));
+
+			if (!isAssignable) {
+				return false;
 			}
 			if (!Modifier.isPublic(writeMethod.getDeclaringClass().getModifiers())) {
 				writeMethod.setAccessible(true);
@@ -161,11 +163,11 @@ public class Beans {
 	}
 
 	public static <S, T> void copyField(S source, T target, String field) {
-		copyField(source, target, field, false);
+		copyField(source, target, field, null);
 	}
 
 	@SuppressWarnings("unchecked")
-	private static <T> T copySelf(T o) {
+	private static <T> T deepCopy(T o) {
 		if (o == null) {
 			return null;
 		}
@@ -185,14 +187,14 @@ public class Beans {
 
 	private static <T, C extends Collection<T>> C copyCollection(C source, C target) {
 		for (T s : source) {
-			target.add((T) copySelf(s));
+			target.add((T) deepCopy(s));
 		}
 		return target;
 	}
 
 	private static <K, V, M extends Map<K, V>> M copyMap(M source, M target) {
 		for (K k : source.keySet()) {
-			target.put((K) copySelf(k), (V) copySelf(source.get(k)));
+			target.put((K) deepCopy(k), (V) deepCopy(source.get(k)));
 		}
 		return target;
 	}

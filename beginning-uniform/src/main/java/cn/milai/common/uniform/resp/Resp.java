@@ -65,27 +65,14 @@ public class Resp<T> {
 	/**
 	 * 若 {@link #isSuccess()} 返回 <code>true</code>，返回 {@link #getData()}
 	 * 否则抛出 {@link RespFailedException}
-	 * @param msg 要覆盖的 msg
-	 * @param msg format 参数
-	 * @return
-	 * @throws RespFailedException
-	 */
-	public T orThrow(String msg, Object... args) throws RespFailedException {
-		if (!isSuccess()) {
-			throw new RespFailedException(this, Strings.format(msg, args));
-		}
-		return getData();
-	}
-
-	/**
-	 * 若 {@link #isSuccess()} 返回 <code>true</code>，返回 {@link #getData()}
-	 * 否则抛出 {@link RespFailedException}
-	 * @param msg
 	 * @return
 	 * @throws RespFailedException
 	 */
 	public T orThrow() throws RespFailedException {
-		return orThrow("");
+		if (!isSuccess()) {
+			throw new RespFailedException(this);
+		}
+		return getData();
 	}
 
 	/**

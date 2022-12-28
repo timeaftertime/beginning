@@ -45,14 +45,14 @@ public class RespTest {
 	@Test
 	public void testThrowOrGet() {
 		Resp<Object> resp1 = Resp.success();
-		assertSame(resp1, resp1.orThrow());
-		Resp<Object> resp2 = Resp.fail(1, "");
+		assertSame(null, resp1.orThrow());
 		String msg = "This is args: %s";
 		String arg = "~~";
+		Resp<Object> resp2 = Resp.fail(1, msg, arg);
 		try {
-			resp2.orThrow(msg, arg);
+			resp2.orThrow();
 		} catch (RespFailedException e) {
-			assertEquals(String.format(msg, arg), e.getMessage());
+			assertEquals(String.format(msg, arg), e.getResp().getDesc());
 			return;
 		}
 		fail();

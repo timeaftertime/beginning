@@ -15,9 +15,12 @@ public class RespFailedException extends RuntimeException {
 	private Resp<Void> resp;
 
 	@SuppressWarnings("unchecked")
-	public RespFailedException(Resp<?> resp, String msg) {
-		super(msg);
+	public RespFailedException(Resp<?> resp) {
 		this.resp = (Resp<Void>) resp;
+	}
+
+	public RespFailedException(RespCode code, String msg) {
+		this.resp = Resp.fail(code, msg);
 	}
 
 	public Resp<Void> getResp() { return resp; }

@@ -36,6 +36,21 @@ public final class Chars {
 	public static final String CR = "\r";
 
 	/**
+	 * \t 制表符
+	 */
+	public static final String TAB = "\t";
+
+	/**
+	 * 空格
+	 */
+	public static final String BLANK = " ";
+
+	/**
+	 * 反斜杠 \
+	 */
+	public static final String BACKSLASH = "\\";
+
+	/**
 	 * \n 换行符
 	 */
 	public static final char C_LF = LF.charAt(0);
@@ -46,9 +61,32 @@ public final class Chars {
 	public static final char C_CR = CR.charAt(0);
 
 	/**
+	 * \t 制表符
+	 */
+	public static final char C_TAB = TAB.charAt(0);
+
+	/**
+	 * 空格
+	 */
+	public static final char C_BLANK = BLANK.charAt(0);
+
+	/**
+	 * 反斜杠 \
+	 */
+	public static final char C_BACKSLASH = BACKSLASH.charAt(0);
+
+	/**
 	 * 字母按照（a-z A-Z)的组成的字符串
 	 */
 	public static final String LETTERS = LOWERS + UPPERS;
+
+	public static String str(char ch) {
+		return "" + ch;
+	}
+
+	public static String str(char... chs) {
+		return new String(chs);
+	}
 
 	/**
 	 * 获取小写字母按照（a-z）的数组

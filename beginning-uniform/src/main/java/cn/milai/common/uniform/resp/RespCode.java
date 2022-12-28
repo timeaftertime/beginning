@@ -1,21 +1,12 @@
 package cn.milai.common.uniform.resp;
 
+import cn.milai.common.uniform.CodeEnum;
+
 /**
  * 响应状态码
  * @author milai
  * @date 2020.12.20
  */
-public interface RespCode {
+public interface RespCode extends CodeEnum {
 
-	/**
-	 * 获取唯一标识码
-	 * @return
-	 */
-	int getCode();
-
-	/**
-	 * 获取描述
-	 * @return
-	 */
-	String getDesc();
 }

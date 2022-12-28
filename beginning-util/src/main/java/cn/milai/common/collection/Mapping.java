@@ -105,7 +105,7 @@ public class Mapping {
 	 * @param mapper
 	 * @return
 	 */
-	public static <T, K> Map<K, List<T>> group(Collection<T> c, Function<T, K> mapper) {
+	public static <T, K> Map<K, List<T>> map(Collection<T> c, Function<T, K> mapper) {
 		return c.stream().collect(Collectors.groupingBy(mapper));
 	}
 
