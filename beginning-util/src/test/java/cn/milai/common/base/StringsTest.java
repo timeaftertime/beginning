@@ -46,4 +46,12 @@ public class StringsTest {
 		assertEquals("[%d]", Strings.format("[%d]", "123"));
 		assertEquals("[%d]", Strings.format("[%d]"));
 	}
+	
+	@Test
+	public void testIsEmpty() {
+		assertTrue(Strings.isEmpty(null));
+		assertTrue(Strings.isEmpty(""));
+		assertFalse(Strings.isEmpty(" "));
+		assertFalse(Strings.isEmpty("123"));
+	}
 }

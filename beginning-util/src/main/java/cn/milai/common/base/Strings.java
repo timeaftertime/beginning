@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * String 相关工具类
+ * 
  * @author milai
  * @date 2020.12.27
  */
@@ -14,11 +15,9 @@ public final class Strings {
 	}
 
 	/**
-	 * 获取字符串的切片
-	 * 包含下标为 start 的字符，不包含下标为 end 的字符
-	 * 若 start < 0 表示下标 str.length() + start
-	 * 若 end < 0  表示下标 str.length() + end
-	 * 若 start > end 表示反顺序取 substring
+	 * 获取字符串的切片 包含下标为 start 的字符，不包含下标为 end 的字符 若 start < 0 表示下标 str.length() + start
+	 * 若 end < 0 表示下标 str.length() + end 若 start > end 表示反顺序取 substring
+	 * 
 	 * @param str
 	 * @param start
 	 * @param end
@@ -41,6 +40,7 @@ public final class Strings {
 
 	/**
 	 * 判断 str 不为 null 且的长度是否在 low 和 hig 之间（左闭右闭）
+	 * 
 	 * @param str
 	 * @param low
 	 * @param hig
@@ -55,6 +55,7 @@ public final class Strings {
 
 	/**
 	 * 将指定字符串列表通过换行符拼接一个字符串
+	 * 
 	 * @param lines
 	 * @return
 	 */
@@ -64,6 +65,7 @@ public final class Strings {
 
 	/**
 	 * 将指定字符串列表拼接成一个字符串
+	 * 
 	 * @param lines
 	 * @return
 	 */
@@ -73,6 +75,7 @@ public final class Strings {
 
 	/**
 	 * 将字符串以换行切割，返回切割后字符串的列表
+	 * 
 	 * @param str
 	 * @return
 	 */
@@ -86,6 +89,7 @@ public final class Strings {
 
 	/**
 	 * 获取 format 使用指定参数格式化后的结果，若格式化失败，返回 format
+	 * 
 	 * @param format
 	 * @param args
 	 * @return
@@ -96,6 +100,16 @@ public final class Strings {
 		} catch (Exception e) {
 			return format;
 		}
+	}
+
+	/**
+	 * 判断字符串是否为空
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public static boolean isEmpty(String s) {
+		return s == null || s.isEmpty();
 	}
 
 }
